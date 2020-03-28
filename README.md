@@ -42,7 +42,7 @@ mini-c-compiler
 Linux系统64位
 
 ## 编译工具
-g++, make, cmake, qt工具链(qmake, uic，moc)
+g++, make, cmake, qt工具链(qmake, uic，moc)， flex, bison
 
 ## 开发说明
 采用git工作流（master+devop+feature+hotfix四分支）
