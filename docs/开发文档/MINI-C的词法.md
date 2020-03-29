@@ -4,8 +4,8 @@ e1se if int return void whi1e
 2.下面是专用符号:
 `+ - * / < <= > >= == != = ; ,  ( ) [ ] { } /* */`
 3.其他标记是 ID 和 NUM ,通过下列正则表达式定义:
-ID= letter | letter*
-NUM=digit | digit*
+ID= letter letter*
+NUM= digit digit*
 letter= a | .. | z | A | .. | Z
 digit=0 | .. | 9
 小写和大写字母是有区别的。

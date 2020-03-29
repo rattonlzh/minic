@@ -7,7 +7,7 @@
 6. fun-declaration→ type-specifier ID(params) compound-stmt
 7. params→params-list | void
 8. param-list→param-list, param | param
-9.  param→ type-specifier ID | type-specifier ID[ ]
+9.  param→ type-specifier ID | type-specifier ID[]
 10. compound-stmt→ { local-declarations statement-list }
 11. local-declarations→ local-declarations var-declaration |empty
 12. statement-list→ statement-list statement | empty
