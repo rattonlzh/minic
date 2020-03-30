@@ -1,3 +1,9 @@
+# 构建说明
+编辑好`minic.l`和`minic.y`文件后,输入构建命令`lex minic.l && yacc minic.y`产生`lex.yy.c`,`y.tab.h`,`y.tab.c`三个文件
+在主函数中调用`yyparse()`开始语法分析过程
+gcc编译命令`gcc lex.yy.c -o scanner`
+# LEX和YACC的简单理解
+lex源文件示例如下:
 ``` lex
 %{
     #include <stdio.h> 
@@ -24,56 +30,42 @@ int yywrap()
     return 0;
 }
 ```
-自动生成yylex()的定义, 不断获取输入,直到遇到结束符,遇到结束符后调用`yywrap()`,返回1是停止解析,可以在`yywrap()`用文件指针指向其他文件,继续解析
-``` y
+解释:
+编译lex文件可以自动生成yylex()的定义, 不断获取输入,直到遇到结束符,遇到结束符后调用`yywrap()`,返回1是停止解析,可以在`yywrap()`用文件指针指向其他文件,继续解析
+
+yacc源文件例子
+``` yacc
 %{
-typedef char* string;
-#define YYSTYLE string
+#include <stdio.h>
 %}
-%token ID NUM keyword
-%start declaration-list
+%token SIMPLE IF ELSE
 %%
-declaration-list : declaration-list declaration | fun-declaration
-program : declaration-list {printf("program started.\n");}
-var-declaration : type-specifier ID; | type-specifier ID[NUM];
-type-specifier : int|void
-fun-declaration : type-specifier ID (params) compound-stmt
-params : param-list|void
-param-list : param-list, param | param
-param : type-specifier ID | type-specifier ID[]
-compound-stmt : { local-declarations statement-list }
-local-declarations : local-declarations var-declaration | empty
-statement-list : statement-list statement | empty
-statement : expression-stmt | compound-stmt | selection-stmt | iteration-stmt | return-stmt
-expression-stmt : expression; | ;
-selection-stmt : if (expression) statement | if (expression) statement else statement
-iteration-stmt : while (expression) statement
-return-stmt : return; | return expression;
-expression : var = expression | simple-expression
-var : ID | ID[expression]
-simple-expression : additive-expression relop additive-expression | additive-expression
-relop : <= | < | > | >= | == | !=
-additive-expression : additive-expression addop term | term
-addop term | term
-addop : + | -
-term : term mulop factor | factor
-mulop : * | /
-factor : (expression) | var | call | NUM
-call : ID(args)
-args : arg-list | empty
-empty : ""
-arg-list : arg-list, expression | expression
+S ; stmnt
+;
+stmnt : SIMPLE
+| if_stmnt
+;
+if_stmnt : IF stmnt
+{ printf("simple if\n");}
+| IF stmnt ELSE stmnt
+{ printf("if_then_else\n");}
+;
 %%
-void main()
+int yylex() 
 {
-    yyparse();
-}
-int yyerror(char* msg)
-{
-    printf("Error: %s
-    encountered at line number:%d\n", msg, yylineno);
+    int c;
+    c=getchar();
+    if (c= =EOF) return 0;
+    else switch(c) 
+        {
+            case ’i’: return IF;
+            case ’s’: return SIMPLE;
+            case ’e’: return ELSE;
+            default: return c;
+        }
 }
 ```
+注意:
 token名字不能起c语言的特殊符号(如if之类的关键字,否则会解析出错)
 yyparse()会不断调用yylex()获取token直到yylex()遇到结束符.
 在yacc源文件中
@@ -89,7 +81,22 @@ if_stmnt : IF stmnt %prec REDUCE
 { printf("if_then_else");}
 ;
 ```
+`%prec`后面跟一个token名字或者一个字符,`%prec`放在语法规则后面,action或者`;`之前,如下
+``` yacc
+%left ’+’ ’–’
+%left ’*’ ’/’
+%%
+expr : expr ’+’ expr
+| expr ’–’ expr
+| expr ’*’ expr
+| expr ’/’ expr
+| ’–’ expr %prec ’*’
+| NAME
+;
+```
+此操作将`expr : ’–’ expr`规则的优先级视为与`*`的优先级一致
 
+出错处理:
 ``` yacc
 stat : error
 {
@@ -99,7 +106,26 @@ yyclearin;
 }
 ;
 ```
-如果规约出错进行一些处理,然后使用宏`yyerrok ;`告诉yacc错误处理完毕了继续工作吧
+如果规约出错进行一些处理,然后使用宏`yyerrok ;`告诉yacc错误处理完毕可以继续工作
 `yyclearin ;`将旧的向前查看的字符清除
 
 词法分析的难点在于注释的正则表达式
+yacc中不允许名字带有`-`,这个要注意
+
+错误提示:
+```
+declaration_list:declaration_list declaration
+| declaration
+;
+```
+误写成了
+```
+declaration_list:declaration_list declaration
+;
+```
+会提示
+```
+minic.y:7.1-7: fatal error: start symbol program does not derive any sentence
+program:declaration_list
+```
+可能是其中一个非终结符对应的产生式规则有问题
