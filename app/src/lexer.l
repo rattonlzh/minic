@@ -1,16 +1,28 @@
 /*
- *Parser::Copyright (c) 2020 scnu-17-cs-group*
- *Parser::Filename: lexer.l
- *Parser::Description: lex源文件,通过正则表达式和动作函数定义词法,使用flexc++工具编译生成扫描器的Parser::C++类
- *Parser::Version : 1.1
- *Parser::Author: 梁泽浩
- *Parser::Created date: 3月28日
+ *Copyright (c) 2020 scnu-17-cs-ratton&bill
+ *Filename: lexer.l
+ *Description: lex源文件,通过正则表达式和动作函数定义词法,使用flexc++工具编译生成扫描器的C++类
+ *Version : 1.2
+ *Author: 梁泽浩
+ *Created date: 3月28日
  */
 %%
-[ \t\r\n]+ {/* blank */}
+[ \t\r\n]+ // nothing to do
 "/*" {
-// Parser::TODO:吃掉注释
-    printf("Parser::COMMENT\n");
+// TODO:吃掉注释
+size_t ch = 0;
+// 不断获取输入
+while (ch = get__()) {
+    // 如果读到*， 则把后面连续的*都取走，如果第一个非*字符是/,说明匹配到了*/,注释结束
+    if (ch == '*') {
+        while((ch = get__()) == '*')
+            ;
+        if (ch == '/' || ch == 0) {
+            break;
+        }
+    }
+
+}
 }
 "else" {
    return Parser::ELSE;
@@ -97,13 +109,13 @@
 "/" {
     return Parser::DIV;
 }
-[Parser::A-Parser::Za-z][Parser::A-Parser::Za-z0-9_]* {
+[A-Za-z]+ {
    return Parser::ID;
 }
-\d+ {
+[0-9]+ {
     return Parser::NUM;
 }
 . {
-    std::cerr << "未定义符号" << std::endl;
+    throw std::invalid_argument("遇到未定义符号！");
 }
 

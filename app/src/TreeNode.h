@@ -1,9 +1,21 @@
-struct Data
-{
-    
+#ifndef TREENODE_H
+#define TREENODE_H
+#include <string>
+using namespace std;
+class TreeNode {
+    string content;
+    TreeNode* left, *right;
+    TreeNode(string c, TreeNode* l = nullptr, TreeNode* r = nullptr);
+    virtual ~TreeNode();
 };
 
-class TreeNode {
-    Data data;
-    TreeNode* childs;
-};
+inline TreeNode::TreeNode(string d, TreeNode* l, TreeNode* r):content(d), left(l), right(r) {}
+inline TreeNode::~TreeNode() {
+    if (!left) {
+        delete left;
+    }
+    if (!right) {
+        delete right;
+    }
+}
+#endif
