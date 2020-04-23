@@ -1,11 +1,15 @@
-.PHONEY: all 
-.PHONY: clean 
-.PHONY: test
-all:src/lexer.cc src/parse.cc
-	g++ src/*.cc -o bin/scanner
-src/lexer.cc src/parse.cc: src/lexer.l src/grammar.y
-	bisonc++ src/grammar.y --target-directory=src/
+.PHONEY:all clean test  testParser
+all:src/lex.cc src/parse.cc
+	g++ src/lex.cc src/parse.cc src/driver.cc -o bin/scanner
+testParser:src/lex.cc src/parse.cc
+	g++ src/lex.cc src/parse.cc src/genSyntaxTree.cc -o bin/parser
+	bin/parser < test/in/testParser1.mc
+
+src/lex.cc: src/lexer.l
 	flexc++ src/lexer.l --target-directory=src/
+src/parse.cc:src/grammar.y
+	bisonc++ src/grammar.y --target-directory=src/
+
 test:
 
 	@bin/scanner test/in/test1.mc  test/out/res1.txt  && diff test/out/res1.txt test/check/check1.txt
