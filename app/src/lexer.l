@@ -6,6 +6,7 @@
  *Author: 梁泽浩
  *Created date: 3月28日
  */
+
 %%
 [ \t\r\n]+ // nothing to do
 "/*" {

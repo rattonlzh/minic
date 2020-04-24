@@ -7,51 +7,95 @@
  */
 #include "TreeUtil.h"
 
-/**
- * 打印语法树
- * @param root 语法树的根节点
- */
-void TreeUtil::printTree(TreeNode *root)
+
+TreeNode * TreeUtil::buildTree(string str)
 {
-    //TODO:打印语法树
+    return new TreeNode(str);
 }
 
-/**
- * 传入字符串str和孩子节点childs, 构造以childs为孩子节点、根节点的数据是str的树，返回树的根节点
- * @param str 根节点的数据
- * @param childs 孩子节点
- * @param n 节点数
- * @return 树的根节点
- */
-TreeNode* TreeUtil::buildTree(string str, TreeNode *childs[], int n)
+void TreeUtil::printTree(TreeNode *root)
+{
+    printTreeNoWrap(root);
+    cout << endl;
+}
+
+
+TreeNode *TreeUtil::buildTree(string str, vector<TreeNode *> childs)
 {
     TreeNode *root = new TreeNode(str);
-    buildTree(root, childs, n);
+    root = buildTree(root, childs);
     return root;
 }
 
-/**
- * 根据传入的根节点root和孩子节点构造以root为根节点的多叉树
- * @param root 根节点 
- * @param childs 孩子节点
- * @param n 孩子节点数
- */
-void TreeUtil::buildTree(TreeNode *root, TreeNode *childs[], int n)
+
+TreeNode *TreeUtil::buildTree(TreeNode *root, vector<TreeNode *> childs)
 {
-    root->left = childs[0]; // 长子节点
-    root = root->left;
-    // 将兄弟节点连成一条右孩子链
-    for (int i = 1; i < n; ++i)
+    // 根节点不存在返回空
+    if (nullptr == root)
     {
-        root->right = childs[i];
-        root = root->right;
+        return nullptr;
     }
+    TreeNode *tmp = root;
+    int k = 0;
+    // 找到第一个非空孩子节点
+    while (k < childs.size() && childs[k] == nullptr)
+        ++k;
+    // 找不到非空孩子节点
+    if (k == childs.size())
+    {
+        return nullptr;
+    }
+    // 找到并切换到长子节点
+    tmp->left = childs[k]; 
+    tmp = tmp->left;
+    // 将兄弟节点连成一条右孩子链
+    for (int i = k+1; i < childs.size(); ++i)
+    {
+        if (childs[i] == nullptr)
+        {
+            continue;
+        }
+        tmp->right = childs[i];
+        tmp = tmp->right;
+    }
+    return root;
 }
-/**
- * 销毁树
- * @param root 被销毁的树的根节点
- */
+
 void TreeUtil::destroyTree(TreeNode *root)
 {
     delete root;
+}
+
+void TreeUtil::printTreeNoWrap(TreeNode *root)
+{
+    if (nullptr == root)
+    {
+        return;
+    }
+    cout << root->content;
+    // root是叶节点
+    if (nullptr == root->left && nullptr == root->right)
+    {
+        return;
+    }
+    // 非叶节点
+    cout << "(";
+    printTreeNoWrap(root->left);
+    cout << ", ";
+    printTreeNoWrap(root->right);
+    cout << ")";
+}
+
+TreeNode* TreeUtil::mergeTree(TreeNode* t1, TreeNode* t2)
+{
+    if (nullptr == t1)
+    {
+        return t2;
+    }
+    TreeNode * tmp = t1;
+    while (tmp->right != nullptr) {
+        tmp = tmp->right;
+    }
+    tmp->right = t2;
+    return t1;
 }

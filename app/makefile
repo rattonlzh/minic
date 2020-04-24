@@ -2,14 +2,14 @@
 all:src/lex.cc src/parse.cc
 	g++ src/lex.cc src/parse.cc src/driver.cc -o bin/scanner
 testParser:src/lex.cc src/parse.cc
-	g++ src/lex.cc src/parse.cc src/genSyntaxTree.cc -o bin/parser
-	bin/parser < test/in/testParser1.mc
-
+	g++ src/lex.cc src/parse.cc src/TreeUtil.cc src/genSyntaxTree.cc -o bin/parser
+	@bin/parser < test/in/testParser1.mc
+	@bin/parser < test/in/testParser2.mc
+	@bin/parser < test/in/testParser3.mc
 src/lex.cc: src/lexer.l
 	flexc++ src/lexer.l --target-directory=src/
 src/parse.cc:src/grammar.y
 	bisonc++ src/grammar.y --target-directory=src/
-
 test:
 
 	@bin/scanner test/in/test1.mc  test/out/res1.txt  && diff test/out/res1.txt test/check/check1.txt

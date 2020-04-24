@@ -18,7 +18,8 @@ using namespace std;
 struct TreeNode {
     string content;
     TreeNode* left, *right;
-    TreeNode(string c, TreeNode* l = nullptr, TreeNode* r = nullptr);
+    TreeNode(){content = "";}
+    TreeNode(string d, TreeNode* l = nullptr, TreeNode* r = nullptr);
     virtual ~TreeNode();
 };
 
