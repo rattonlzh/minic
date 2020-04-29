@@ -1,7 +1,7 @@
 /**
  * @file testParser4.mc
  * @author Liang Zehao
- * @brief 
+ * @brief 测试是否能生成正常程序的语法树
  * @version 0.1
  * @date 2020-04-23
  * 

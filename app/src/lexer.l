@@ -1,16 +1,18 @@
-/*
- *Copyright (c) 2020 scnu-17-cs-ratton&bill
- *Filename: lexer.l
- *Description: lex源文件,通过正则表达式和动作函数定义词法,使用flexc++工具编译生成扫描器的C++类
- *Version : 1.2
- *Author: 梁泽浩
- *Created date: 3月28日
+/**
+ * @file: lexer.l
+ * @author: Liang Zehao
+ * @brief: lex源文件,通过正则表达式和动作函数定义词法,使用flexc++工具编译生成扫描器的C++类
+ *
+ * @version : 1.4
+ * @date: 2020.04.24 
+ *
+ * @copyright Copyright (c) 2020
+ *
  */
-
 %%
 [ \t\r\n]+ // nothing to do
 "/*" {
-// TODO:吃掉注释
+// 吃掉注释
 size_t ch = 0;
 // 不断获取输入
 while (ch = get__()) {

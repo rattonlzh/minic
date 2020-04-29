@@ -1,9 +1,13 @@
 /**
- * @file: TreeNode.h
- * @brief: TreeNode类定义语法树节点
- * @version: 0.1
- * @author: Liang Zehao
- * @date: 2020.04.21
+ * @file TreeNode.h
+ * @author Liang Zehao
+ * @brief TreeNode类定义语法树节点
+ * 
+ * @version 0.1
+ * @date 2020.04.21
+ * 
+ * @copyright Copyright (c) 2020
+ * 
  */
 
 #ifndef TREENODE_H

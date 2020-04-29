@@ -1,14 +1,19 @@
 /**
  * @file grammar.y
- * @brief 定义语法分析需要的产生式，开始产生式，终端符号，非终端符号和语义动作
- * @version 0.1
  * @author Liang Zehao
+ * @brief 定义语法分析需要的产生式，开始产生式，终端符号，非终端符号和语义动作
+ * 
+ * @version 0.1
  * @date 2020.04.21
+ * 
+ * @copyright Copyright (c) 2020
+ *
  */
 %no-lines
 %scanner Scanner.ih
 %token ELSE IF RETURN INT VOID WHILE ID NUM LEFTP RIGHTP LEFTS RIGHTS LEFTB RIGHTB COMMA SEMICOLON ADD SUB MUL DIV
 %right ASSIGN
+%nonassoc LT LE GT GE EQ NE
 /**
  * 在ParserBase.h中插入头文件
  */
@@ -17,13 +22,12 @@
  * 定义非终结符和终结符的语义类型
  */
 %stype TreeNode*
-%nonassoc LT LE GT GE EQ NE
+
 %%
 program:
     declaration_list {
-        $$ = TreeUtil::buildTree("程序声明列表", {$1});
+        $$ = TreeUtil::buildTree("程序", {$1});
         TreeUtil::printTree($$);
-
         TreeUtil::destroyTree($$);
     }
 ;
@@ -55,8 +59,7 @@ var_declaration:
 
     }
     | type_specifier id LEFTS num RIGHTS SEMICOLON {
-        $1->content += "[]";
-        $1->left = $4;
+        $1->content += "[" + $4->content + "]";
         $$ = TreeUtil::buildTree("变量声明", {$1,$2});
 
     }
@@ -73,12 +76,13 @@ type_specifier:
 
 fun_declaration:
     type_specifier id LEFTP params RIGHTP compound_stmt {
-        $$ = TreeUtil::buildTree("函数声明", {$1, $2, $4, $6});
+        TreeNode* tmp = TreeUtil::buildTree("参数", {$4});
+        $$ = TreeUtil::buildTree("函数声明", {$1, $2, tmp, $6});
     }
 ;
 params: 
     param_list {
-        $$ = TreeUtil::buildTree("参数列表",{$1});
+        $$ = $1;
     }
     | VOID {
         $$ = TreeUtil::buildTree("void");
@@ -104,9 +108,7 @@ param:
 
 compound_stmt:
     LEFTB local_declarations statement_list RIGHTB {
-        TreeNode* tmp = TreeUtil::buildTree("局部变量声明", {$2});
-        TreeNode* tmp2 = TreeUtil::buildTree("语句列表", {$3});
-        $$ = TreeUtil::buildTree("复合语句列表", {tmp, tmp2});
+        $$ = TreeUtil::buildTree("{}", {$2, $3});
     }
 ;
 
@@ -157,20 +159,17 @@ expression_stmt:
 
 selection_stmt:
     IF LEFTP expression RIGHTP statement {
-        TreeNode* tmp = TreeUtil::buildTree("条件成立时执行的语句", {$5});
-        $$ = TreeUtil::buildTree("if", {$3, tmp});
+        $$ = TreeUtil::buildTree("if", {$3, $5});
     }
     | IF LEFTP expression RIGHTP statement ELSE statement {
-        TreeNode* tmp = TreeUtil::buildTree("条件成立时执行的语句", {$5});
-        TreeNode* tmp2 = TreeUtil::buildTree("条件不成立时执行的语句", {$7});
-        $$ = TreeUtil::buildTree("if", {$3, tmp, tmp2});
+
+        $$ = TreeUtil::buildTree("if", {$3, $5, $7});
     }
 ;
 
 iteration_stmt:
     WHILE LEFTP expression RIGHTP statement {
-        TreeNode* tmp = TreeUtil::buildTree("条件成立时执行的语句", {$5});
-        $$ = TreeUtil::buildTree("while", {$3, tmp});
+        $$ = TreeUtil::buildTree("while", {$3, $5});
     }
 ;
 
@@ -286,14 +285,14 @@ call:
 
 args:
     arg_list {
-        $$ = TreeUtil::buildTree("参数列表", {$1});
+        $$ = TreeUtil::buildTree("参数", {$1});
     }
     | //empty 
 ;
 
 arg_list:
     arg_list COMMA expression {
-        $$ = TreeUtil::mergeTree($1, $2);
+        $$ = TreeUtil::mergeTree($1, $3);
     }
     | expression {
         $$ = $1;

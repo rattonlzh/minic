@@ -1,9 +1,13 @@
 /**
- * @file: TreeUtil.h
- * @brief: TreeUtil类是一个工具类，用于对TreeNode类进行一些操作如构造树，打印树
- * @version: 0.1
- * @author: Liang Zehao
- * @date: 2020.04.21
+ * @file TreeUtil.h
+ * @author Liang Zehao
+ * @brief TreeUtil类是一个工具类，用于对TreeNode类进行一些操作如构造树，打印树
+ * 
+ * @version 0.1
+ * @date 2020.04.21
+ * 
+ * @copyright Copyright (c) 2020
+ * 
  */
 #ifndef TREEUTIL_H
 #define TREEUTIL_H
@@ -60,13 +64,39 @@ public:
      */
     static TreeNode *mergeTree(TreeNode *t1, TreeNode *t2);
 
-private:
     /**
-     * @brief 打印语法树，末尾没有换行 
+     * @brief Set the Root object
      * 
      * @param root 
      */
-    static void printTreeNoWrap(TreeNode *root);
+    static void setRoot(TreeNode* root);
+
+    /**
+     * @brief Get the Root object
+     * 
+     * @return TreeNode* 
+     */
+    static TreeNode* getRoot();
+    /**
+     * @brief 保持对一个子树根节点的引用
+     * 
+     */
+    static TreeNode* rootHandle;
+private:
+    /**
+     * @brief 打印语法树
+     * 
+     * @param root 根节点
+     * @param k 根节点前面打印k个缩进
+     */
+    static void printTreeNoWrap(TreeNode *root, int k = 0);
+    /**
+     * @brief 打印树的层次缩进
+     * 
+     * @param k 树的层次，从0开始
+     * @param flag 
+     */
+    static void printTab(int k = 0, bool end = false);
 };
 
 #endif
