@@ -1,5 +1,5 @@
 /**
- * @file testParser1.mc
+ * @file testGenTree1.mc
  * @author Liang Zehao
  * @brief 检查变量声明和函数声明
  * @version 0.1

@@ -1,7 +1,7 @@
 /**
- * @file testParser4.mc
+ * @file testGenTree4.mc
  * @author Liang Zehao
- * @brief 测试是否能生成正常程序的语法树
+ * @brief 项目指导书要求的测试1
  * @version 0.1
  * @date 2020-04-23
  * 
