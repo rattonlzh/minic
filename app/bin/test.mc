@@ -1,58 +1,24 @@
-/* A program to perform selection sort on a 10
-element array。*/
-int x[10];
-int minloc(int a[], int low, int high)
+/**
+ * @file testGenTree3.mc
+ * @author Liang Zehao
+ * @brief 检查if语句，while语句,关系表达式
+ * @version 0.1
+ * @date 2020-04-23
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ */
+
+int var;
+
+int main(void)
 {
-    int i;
-    int x;
-    int k;
-    k = low;
-    x = a[low];
-    i = low + 1;
+    int max;
+    if (2 > 3) max = 2;
 
-    while(i < high)
+    while (i < max)
     {
-        if(a[i] < x)
-        {
-            x = a[i];
-            k = i;
-        }
-
-        i = i + 1;
-    }
-
-    return k;
-}
-void sort( int a[], int low, int high)
-{
-    int i;
-    int k;
-    i = low;
-
-    while(i < high - 1)
-    {
-        int t;
-        k = minloc(a, i, high);
-        t = a[k];
-        a[k] = a[i];
-        a[i] = t;
-        i = i + 1;
-    }
-}
-void main(void)
-{
-    int i;
-    i = 0;
-    while(i < 10)
-    {
-        x[i] = input();
-        i = i + 1;
-        sort(x, 0, 10);
-        i = 0;
-        while(i < 10)
-        {
-            output(x[i]);
-            i = i + 1;
-        }
-    }
+        output(i);
+    } 
+    return 0;
 }
