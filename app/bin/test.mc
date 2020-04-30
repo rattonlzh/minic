@@ -1,27 +1,58 @@
-/**
- * @file testParser4.mc
- * @author Liang Zehao
- * @brief 测试是否能生成正常程序的语法树
- * @version 0.1
- * @date 2020-04-23
- * 
- * @copyright Copyright (c) 2020
- * 
- */
-
-/* A program to perform Euclid's
-Algorithm to compute gcd. */
-int gcd (int u, int v)
-{ if (v == 0)return u;
-else return gcd(v,u-u/v*v);
-/* u-u/v*v == u mod v */
-}
-
-void main(void)
-{ 
+/* A program to perform selection sort on a 10
+element array。*/
+int x[10];
+int minloc(int a[], int low, int high)
+{
+    int i;
     int x;
-    int y;
-    x=input();
-    y=input();
-    output(gcd(x, y));
+    int k;
+    k = low;
+    x = a[low];
+    i = low + 1;
+
+    while(i < high)
+    {
+        if(a[i] < x)
+        {
+            x = a[i];
+            k = i;
+        }
+
+        i = i + 1;
+    }
+
+    return k;
+}
+void sort( int a[], int low, int high)
+{
+    int i;
+    int k;
+    i = low;
+
+    while(i < high - 1)
+    {
+        int t;
+        k = minloc(a, i, high);
+        t = a[k];
+        a[k] = a[i];
+        a[i] = t;
+        i = i + 1;
+    }
+}
+void main(void)
+{
+    int i;
+    i = 0;
+    while(i < 10)
+    {
+        x[i] = input();
+        i = i + 1;
+        sort(x, 0, 10);
+        i = 0;
+        while(i < 10)
+        {
+            output(x[i]);
+            i = i + 1;
+        }
+    }
 }
