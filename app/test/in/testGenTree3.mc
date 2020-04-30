@@ -1,5 +1,5 @@
 /**
- * @file testParser3.mc
+ * @file testGenTree3.mc
  * @author Liang Zehao
  * @brief 检查if语句，while语句,关系表达式
  * @version 0.1

@@ -1,5 +1,5 @@
 /**
- * @file testParser2.mc
+ * @file testGenTree2.mc
  * @author Liang Zehao
  * @brief 检查局部变量声明，赋值运算，函数调用，复杂算术表达式
  * @version 0.1
