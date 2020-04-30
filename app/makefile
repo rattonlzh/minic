@@ -1,11 +1,16 @@
-.PHONEY:test clean install testScanner testGenTree all doc
-all: clean install
+CCFLAGS=-std=c++11 -Wall -g
+SRC_SCAN=lex.cc scan.cc 
+SRC_GENTREE=lex.cc parse.cc TreeUtil.cc genTree.cc
+.PHONEY:test clean install testScanner testGenTree all doc 
+all: 
+	g++ $(CCFLAGS) $(addprefix src\, $(SRC_SCAN)) -o bin\scan.exe
+	g++ $(CCFLAGS) $(addprefix src\, $(SRC_GENTREE)) -o bin\genTree.exe
 install: bin/scan bin/genTree
 	@echo 可执行文件已经在bin目录生成
 bin/scan:src/lex.cc src/parse.cc
-	g++ src/lex.cc src/parse.cc src/scan.cc src/TreeUtil.cc -o bin/scan
+	g++ $(CCFLAGS) $(addprefix src/, $(SRC_SCAN)) -o bin/scan
 bin/genTree:src/lex.cc src/parse.cc
-	g++ src/lex.cc src/parse.cc src/TreeUtil.cc src/genTree.cc -o bin/genTree
+	g++ $(CCFLAGS) $(addprefix src/, $(SRC_GENTREE)) -o bin/genTree
 src/lex.cc: src/lexer.l
 	flexc++ src/lexer.l --target-directory=src/
 src/parse.cc:src/grammar.y

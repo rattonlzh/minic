@@ -16,7 +16,6 @@
 #ifndef Parser_ih_included
 #define Parser_ih_included
 // $insert class.h
-#include "TreeUtil.h"
 #include "Parser.h"
 
 inline void Parser::error()

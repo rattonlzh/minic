@@ -35,18 +35,15 @@ program:
 declaration_list:
     declaration_list declaration {
         $$ = TreeUtil::mergeTree($1, $2);
-        
     }
     | declaration {
         $$ = $1;
-
     }
 ;
 
 declaration:
     var_declaration {
         $$ = $1;
-
     }
     | fun_declaration {
         $$ = $1;
@@ -56,12 +53,10 @@ declaration:
 var_declaration:
     type_specifier id SEMICOLON {
         $$ = TreeUtil::buildTree("变量声明", {$1, $2});
-
     }
     | type_specifier id LEFTS num RIGHTS SEMICOLON {
         $1->content += "[" + $4->content + "]";
         $$ = TreeUtil::buildTree("变量声明", {$1,$2});
-
     }
 ;
 
@@ -162,7 +157,6 @@ selection_stmt:
         $$ = TreeUtil::buildTree("if", {$3, $5});
     }
     | IF LEFTP expression RIGHTP statement ELSE statement {
-
         $$ = TreeUtil::buildTree("if", {$3, $5, $7});
     }
 ;

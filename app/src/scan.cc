@@ -34,85 +34,85 @@ int main(int argc, char **argv)
             string const &text = scanner.matched();
             switch (token)
             {
-            case Parser::ELSE:
+            case ParserBase::ELSE:
                 cout << "ELSE: " << text << endl;
                 break;
-            case Parser::IF:
+            case ParserBase::IF:
                 cout << "IF: " << text << endl;
                 break;
-            case Parser::RETURN:
+            case ParserBase::RETURN:
                 cout << "RETURN: " << text << endl;
                 break;
-            case Parser::INT:
+            case ParserBase::INT:
                 cout << "INT: " << text << endl;
                 break;
-            case Parser::VOID:
+            case ParserBase::VOID:
                 cout << "VOID: " << text << endl;
                 break;
-            case Parser::WHILE:
+            case ParserBase::WHILE:
                 cout << "WHILE: " << text << endl;
                 break;
-            case Parser::LT:
+            case ParserBase::LT:
                 cout << "LT: " << text << endl;
                 break;
-            case Parser::LE:
+            case ParserBase::LE:
                 cout << "LE: " << text << endl;
                 break;
-            case Parser::GT:
+            case ParserBase::GT:
                 cout << "GT: " << text << endl;
                 break;
-            case Parser::GE:
+            case ParserBase::GE:
                 cout << "GE: " << text << endl;
                 break;
-            case Parser::EQ:
+            case ParserBase::EQ:
                 cout << "EQ: " << text << endl;
                 break;
-            case Parser::NE:
+            case ParserBase::NE:
                 cout << "NE: " << text << endl;
                 break;
-            case Parser::COMMA:
+            case ParserBase::COMMA:
                 cout << "COMMA: " << text << endl;
                 break;
-            case Parser::SEMICOLON:
+            case ParserBase::SEMICOLON:
                 cout << "SEMICOLON: " << text << endl;
                 break;
-            case Parser::ADD:
+            case ParserBase::ADD:
                 cout << "ADD: " << text << endl;
                 break;
-            case Parser::SUB:
+            case ParserBase::SUB:
                 cout << "SUB: " << text << endl;
                 break;
-            case Parser::MUL:
+            case ParserBase::MUL:
                 cout << "MUL: " << text << endl;
                 break;
-            case Parser::DIV:
+            case ParserBase::DIV:
                 cout << "DIV: " << text << endl;
                 break;
-            case Parser::ASSIGN:
+            case ParserBase::ASSIGN:
                 cout << "ASSIGN: " << text << endl;
                 break;
-            case Parser::LEFTP:
+            case ParserBase::LEFTP:
                 cout << "LEFTP: " << text << endl;
                 break;
-            case Parser::RIGHTP:
+            case ParserBase::RIGHTP:
                 cout << "RIGHTP: " << text << endl;
                 break;
-            case Parser::LEFTS:
+            case ParserBase::LEFTS:
                 cout << "LEFTS: " << text << endl;
                 break;
-            case Parser::RIGHTS:
+            case ParserBase::RIGHTS:
                 cout << "RIGHTS: " << text << endl;
                 break;
-            case Parser::LEFTB:
+            case ParserBase::LEFTB:
                 cout << "LEFTB: " << text << endl;
                 break;
-            case Parser::RIGHTB:
+            case ParserBase::RIGHTB:
                 cout << "RIGHTB: " << text << endl;
                 break;
-            case Parser::ID:
+            case ParserBase::ID:
                 cout << "ID: " << text << endl;
                 break;
-            case Parser::NUM:
+            case ParserBase::NUM:
                 cout << "NUM: " << text << endl;
                 break;
             default:

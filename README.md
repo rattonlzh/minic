@@ -6,6 +6,8 @@
 .
 ├── app
 │   ├── bin
+│   │   ├── scan.exe
+│   │   ├── genTree.exe
 │   │   ├── genTree
 │   │   └── scan
 │   ├── makefile

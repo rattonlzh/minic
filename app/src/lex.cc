@@ -575,7 +575,7 @@ try
         {
 #line 30 "src/lexer.l"
             {
-                return Parser::ELSE;
+                return ParserBase::ELSE;
             }
         }
         break;
@@ -584,7 +584,7 @@ try
 #line 33 "src/lexer.l"
             {
                 
-                return Parser::IF;
+                return ParserBase::IF;
             }
         }
         break;
@@ -593,7 +593,7 @@ try
 #line 37 "src/lexer.l"
             {
                 
-                return Parser::INT;
+                return ParserBase::INT;
             }
         }
         break;
@@ -602,7 +602,7 @@ try
 #line 41 "src/lexer.l"
             {
                 
-                return Parser::RETURN;
+                return ParserBase::RETURN;
             } 
         }
         break;
@@ -611,7 +611,7 @@ try
 #line 45 "src/lexer.l"
             {
                 
-                return Parser::VOID;
+                return ParserBase::VOID;
             }
         }
         break;
@@ -620,7 +620,7 @@ try
 #line 49 "src/lexer.l"
             {
                 
-                return Parser::WHILE;
+                return ParserBase::WHILE;
             }
         }
         break;
@@ -629,7 +629,7 @@ try
 #line 53 "src/lexer.l"
             {
                 
-                return Parser::ASSIGN;
+                return ParserBase::ASSIGN;
             }
         }
         break;
@@ -638,7 +638,7 @@ try
 #line 57 "src/lexer.l"
             {
                 
-                return Parser::GT;
+                return ParserBase::GT;
             }
         }
         break;
@@ -647,7 +647,7 @@ try
 #line 61 "src/lexer.l"
             {
                 
-                return Parser::GE;
+                return ParserBase::GE;
             }
         }
         break;
@@ -656,7 +656,7 @@ try
 #line 65 "src/lexer.l"
             {
                 
-                return Parser::LT;
+                return ParserBase::LT;
             }
         }
         break;
@@ -665,7 +665,7 @@ try
 #line 69 "src/lexer.l"
             {
                 
-                return Parser::LE;
+                return ParserBase::LE;
             }
         }
         break;
@@ -673,7 +673,7 @@ try
         {
 #line 73 "src/lexer.l"
             {
-                return Parser::EQ;
+                return ParserBase::EQ;
             }
         }
         break;
@@ -681,7 +681,7 @@ try
         {
 #line 76 "src/lexer.l"
             {
-                return Parser::NE;
+                return ParserBase::NE;
             }
         }
         break;
@@ -689,7 +689,7 @@ try
         {
 #line 79 "src/lexer.l"
             {
-                return Parser::LEFTP;
+                return ParserBase::LEFTP;
             }
         }
         break;
@@ -697,7 +697,7 @@ try
         {
 #line 82 "src/lexer.l"
             {
-                return Parser::RIGHTP;
+                return ParserBase::RIGHTP;
             }
         }
         break;
@@ -705,7 +705,7 @@ try
         {
 #line 85 "src/lexer.l"
             {
-                return Parser::LEFTS;
+                return ParserBase::LEFTS;
             }
         }
         break;
@@ -713,7 +713,7 @@ try
         {
 #line 88 "src/lexer.l"
             {
-                return Parser::RIGHTS;
+                return ParserBase::RIGHTS;
             }
         }
         break;
@@ -721,7 +721,7 @@ try
         {
 #line 91 "src/lexer.l"
             {
-                return Parser::LEFTB;
+                return ParserBase::LEFTB;
             }
         }
         break;
@@ -729,7 +729,7 @@ try
         {
 #line 94 "src/lexer.l"
             {
-                return Parser::RIGHTB;
+                return ParserBase::RIGHTB;
             }
         }
         break;
@@ -737,7 +737,7 @@ try
         {
 #line 97 "src/lexer.l"
             {
-                return Parser::COMMA;
+                return ParserBase::COMMA;
             }
         }
         break;
@@ -745,7 +745,7 @@ try
         {
 #line 100 "src/lexer.l"
             {
-                return Parser::SEMICOLON;
+                return ParserBase::SEMICOLON;
             }
         }
         break;
@@ -753,7 +753,7 @@ try
         {
 #line 103 "src/lexer.l"
             {
-                return Parser::ADD;
+                return ParserBase::ADD;
             }
         }
         break;
@@ -761,7 +761,7 @@ try
         {
 #line 106 "src/lexer.l"
             {
-                return Parser::SUB;
+                return ParserBase::SUB;
             }
         }
         break;
@@ -769,7 +769,7 @@ try
         {
 #line 109 "src/lexer.l"
             {
-                return Parser::MUL;
+                return ParserBase::MUL;
             }
         }
         break;
@@ -777,7 +777,7 @@ try
         {
 #line 112 "src/lexer.l"
             {
-                return Parser::DIV;
+                return ParserBase::DIV;
             }
         }
         break;
@@ -785,7 +785,7 @@ try
         {
 #line 115 "src/lexer.l"
             {
-                return Parser::ID;
+                return ParserBase::ID;
             }
         }
         break;
@@ -793,7 +793,7 @@ try
         {
 #line 118 "src/lexer.l"
             {
-                return Parser::NUM;
+                return ParserBase::NUM;
             }
         }
         break;

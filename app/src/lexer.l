@@ -28,95 +28,85 @@ while (ch = get__()) {
 }
 }
 "else" {
-   return Parser::ELSE;
+   return ParserBase::ELSE;
 }
 "if" {
-    
-    return Parser::IF;
+    return ParserBase::IF;
 }
 "int" {
-    
-    return Parser::INT;
+    return ParserBase::INT;
 }
 "return" {
-    
-    return Parser::RETURN;
+    return ParserBase::RETURN;
 } 
 "void" {
-    
-    return Parser::VOID;
+    return ParserBase::VOID;
 }
 "while" {
-    
-    return Parser::WHILE;
+    return ParserBase::WHILE;
 }
 "=" {
-    
-    return Parser::ASSIGN;
+    return ParserBase::ASSIGN;
 }
 ">" {
-    
-    return Parser::GT;
+    return ParserBase::GT;
 }
 ">=" {
-    
-    return Parser::GE;
+    return ParserBase::GE;
 }
 "<" {
-    
-    return Parser::LT;
+    return ParserBase::LT;
 }
 "<=" {
-    
-    return Parser::LE;
+    return ParserBase::LE;
 }
 "==" {
-    return Parser::EQ;
+    return ParserBase::EQ;
 }
 "!=" {
-    return Parser::NE;
+    return ParserBase::NE;
 }
 "(" {
-    return Parser::LEFTP;
+    return ParserBase::LEFTP;
 }
 ")" {
-    return Parser::RIGHTP;
+    return ParserBase::RIGHTP;
 }
 "[" {
-    return Parser::LEFTS;
+    return ParserBase::LEFTS;
 }
 "]" {
-    return Parser::RIGHTS;
+    return ParserBase::RIGHTS;
 }
 "{" {
-    return Parser::LEFTB;
+    return ParserBase::LEFTB;
 }
 "}" {
-    return Parser::RIGHTB;
+    return ParserBase::RIGHTB;
 }
 "," {
-    return Parser::COMMA;
+    return ParserBase::COMMA;
 }
 ";" {
-    return Parser::SEMICOLON;
+    return ParserBase::SEMICOLON;
 }
 "+" {
-    return Parser::ADD;
+    return ParserBase::ADD;
 }
 "-" {
-    return Parser::SUB;
+    return ParserBase::SUB;
 }
 "*" {
-    return Parser::MUL;
+    return ParserBase::MUL;
 }
 "/" {
-    return Parser::DIV;
+    return ParserBase::DIV;
 }
 [A-Za-z]+ {
-   return Parser::ID;
+   return ParserBase::ID;
 }
 [0-9]+ {
-    return Parser::NUM;
+    return ParserBase::NUM;
 }
 . {
     throw std::invalid_argument("遇到未定义符号！");
