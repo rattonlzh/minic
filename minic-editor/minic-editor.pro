@@ -16,18 +16,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    dialogpreference.cpp \
-    editorutil.cpp \
     main.cpp \
     editor.cpp
 
 HEADERS += \
-    dialogpreference.h \
     editor.h \
-    editorutil.h
 
 FORMS += \
-    dialogpreference.ui \
     editor.ui
 
 TRANSLATIONS += \

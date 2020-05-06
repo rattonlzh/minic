@@ -14,6 +14,8 @@ class Editor : public QMainWindow
 public:
     Editor(QWidget *parent = nullptr);
     ~Editor();
+    void save();
+    void  call(QString bin);
 
 private slots:
     void on_scannerBtn_clicked();
@@ -23,6 +25,9 @@ private slots:
     void on_genTreeBtn_clicked();
 
 private:
+    void init();
+    QString fileName;
     Ui::Editor *ui;
+    QString input;
 };
 #endif // EDITOR_H
