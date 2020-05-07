@@ -12,8 +12,20 @@
 #include "Parser.ih"
 #include <fstream>
 using namespace std;
+/**
+ * @brief 
+ * 
+ * @param argc 
+ * @param argv 
+ * @return int 
+ */
 int main(int argc, char** argv)
 {
+    /**
+     * @brief 
+     * 
+     */
+    int a;
     if (argc == 1) {
         cout << "请指定输入文件" << endl;
         return 0;

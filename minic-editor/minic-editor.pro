@@ -17,13 +17,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     main.cpp \
-    editor.cpp
+    editor.cpp \
+    optiondialog.cc
 
 HEADERS += \
-    editor.h \
+    editor.h \ \
+    optiondialog.h
 
 FORMS += \
-    editor.ui
+    editor.ui \
+    optiondialog.ui
 
 TRANSLATIONS += \
     minic-editor_zh_CN.ts
