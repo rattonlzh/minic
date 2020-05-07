@@ -1,6 +1,8 @@
 #ifndef OPTIONDIALOG_H
 #define OPTIONDIALOG_H
 
+#include "common.h"
+
 #include <QDialog>
 
 namespace Ui {
@@ -13,6 +15,7 @@ class OptionDialog : public QDialog
         
     public:
         explicit OptionDialog(QWidget *parent = nullptr);
+        OptionDialog(CmdPath* cpaths, QWidget *parent = nullptr);
         ~OptionDialog();
         
     private slots:
@@ -23,6 +26,7 @@ class OptionDialog : public QDialog
         void on_buttonBox_accepted();
         
     private:
+        CmdPath* paths;
         Ui::OptionDialog *ui;
 };
 

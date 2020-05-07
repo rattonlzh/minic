@@ -1,5 +1,5 @@
 /**
- * @file editor.cpp
+ * @file editor.cc
  * @author Liang Zehao
  * @brief minic编辑器的主界面
  * 
@@ -18,6 +18,7 @@
 #include <QMessageBox>
 #include <QProcess>
 #include <optiondialog.h>
+#include <QSettings>
 
 
 Editor::Editor(QWidget *parent)
@@ -29,9 +30,23 @@ Editor::Editor(QWidget *parent)
 
 
 void Editor::init() {
-    fileName = QCoreApplication::applicationDirPath()+"/autosaved.mc";
+fileName = QCoreApplication::applicationDirPath()+"/autosaved.mc";
+    //Qt中使用QSettings类读写ini文件   
+    //QSettings构造函数的第一个参数是ini文件的路径,第二个参数表示针对ini文件,第三个参数可以缺省   
+    QSettings config("minic.ini", QSettings::IniFormat);  
+    cmdpath.scanPath = config.value("scan", 
+                                    QCoreApplication::applicationDirPath()
+                                    +"/scan").toString();
+    cmdpath.genTreePath = config.value("genTree", 
+                                       QCoreApplication::applicationDirPath()
+                                       +"/genTree").toString();
 }
+
 Editor::~Editor() {
+    QSettings config("minic.ini", QSettings::IniFormat);  
+    config.setValue("scan", cmdpath.scanPath);
+    config.setValue("genTree", cmdpath.genTreePath);
+    config.sync();
     delete ui;
 }
 
@@ -44,13 +59,37 @@ void Editor::on_scannerBtn_clicked() {
 }
 void Editor::call(QString bin) {
     QProcess p(0);
-    p.setWorkingDirectory(QCoreApplication::applicationDirPath());//切换工作目录
-    p.start(QCoreApplication::applicationDirPath()+"/"+bin, QStringList() 
-            << fileName);
+//    根据bin的值调用相应的命令
+    if (bin == tr("scan")) {
+        p.start(cmdpath.scanPath, QStringList() 
+                << fileName);
+    }else if (bin == tr("genTree")) {
+        p.start(cmdpath.genTreePath, QStringList() 
+                << fileName);
+    }
+//   开始执行
     p.waitForStarted();
     p.waitForFinished();
-    QString strTemp=QString::fromLocal8Bit(p.readAllStandardOutput());
-    ui->outputArea->setText(strTemp);
+//    如果命令行程序抛出异常，则屏幕显示错误信息
+    QString err = QString::fromLocal8Bit(p.readAllStandardError());
+    if (!err.isEmpty()) {
+        ui->outputArea->setText(err);
+        return;
+    }
+//    屏幕显示命令行程序的输出
+    QString output=QString::fromLocal8Bit(p.readAllStandardOutput());
+    ui->outputArea->setText(output);
+    if (ui->saveCheckBox->isChecked() && !ui->savePathEdit->text().isEmpty()) {
+        QFile f(ui->savePathEdit->text());
+        if (f.open(QIODevice::Text|QIODevice::ReadWrite)) {
+            f.resize(0);
+            QTextStream out(&f);
+            out << ui->outputArea->toPlainText() << endl;
+            f.close();
+        }else {
+            ui->statusbar->showMessage("输出结果保存失败");
+        }
+    }
 }
 
 void Editor::open()
@@ -72,6 +111,7 @@ void Editor::open()
     ui->codeArea->setPlainText(in.readAll());
     f.close();
 }
+
 void Editor::save() {
     QFile file(fileName);
     // 打开文件，必须是文本文件，并且可读可写，打开失败时弹出警告框
@@ -80,16 +120,17 @@ void Editor::save() {
         warn("此路径不是文本文件或者已被其他程序打开");
         return;
     }
-    file.resize(0);
+    file.resize(0);// 清空文件内容
     QTextStream out(&file);// 输出流用于写入文件
     QApplication::setOverrideCursor(Qt::WaitCursor); // 保存过程中，光标设置被等待状态
     out << ui->codeArea->toPlainText();
     QApplication::restoreOverrideCursor();// 保存完毕，光标回复原状态
     file.close();
 }
+
 void Editor::on_action_Preference_triggered() {
     qDebug() << "偏好设置按钮被点击" << endl;
-    OptionDialog* od = new OptionDialog(this);
+    OptionDialog* od = new OptionDialog(&cmdpath, this);
     od->show();
 }
 

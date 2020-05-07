@@ -1,5 +1,5 @@
 /**
- * @file main.cpp
+ * @file main.cc
  * @author Liang Zehao
  * @brief 窗体主函数入口
  * 

@@ -14,6 +14,8 @@
 #ifndef EDITOR_H
 #define EDITOR_H
 
+#include "common.h"
+
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -26,7 +28,6 @@ QT_END_NAMESPACE
 class Editor : public QMainWindow
 {
     Q_OBJECT
-
 public:
     Editor(QWidget *parent = nullptr);
     ~Editor();
@@ -39,12 +40,16 @@ public:
      * @param bin 命令行程序的名称，必须与gui程序在同级目录下
      */
     void  call(QString bin);
-
+    /**
+     * @brief cmdpath持有各个可执行程序的路径
+     */
+    CmdPath cmdpath;
     /**
      * @brief open打开文件，加载文本文件到代码编辑区
      */
     void open();
-    private slots:
+    
+private slots:
     void on_scannerBtn_clicked();
 
     void on_action_Preference_triggered();
@@ -62,7 +67,7 @@ public:
     
     void on_action_New_triggered();
     
-    private:
+private:
     /**
      * @brief 在此定义界面无关的初始化逻辑
      */
