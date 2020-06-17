@@ -2,7 +2,7 @@
 #include "util.h"
 
 /* set NO_PARSE to TRUE to get a scanner-only compiler */
-#define NO_PARSE TRUE
+#define NO_PARSE FALSE
 
 /* set NO_ANALYZE to TRUE to get a parser-only compiler */
 #define NO_ANALYZE FALSE
@@ -28,7 +28,7 @@ FILE * code;
 
 /* allocate and set tracing flags */
 int EchoSource   = FALSE;
-int TraceScan    = FALSE;
+int TraceScan    = TRUE;
 int TraceParse   = TRUE;
 int TraceAnalyze = TRUE;
 int TraceCode    = FALSE;
@@ -59,6 +59,9 @@ int main( int argc, char * argv[] )
 
 	listing = stdout;
 	fprintf(listing, "\nMINIC COMPILATION: %s\n\n", pgm);
+	if (TraceScan) {
+		while (getToken() != ENDFILE);// 打印词法符号
+	}
 
 #if NO_PARSE
 	while (getToken() != ENDFILE);// 打印词法符号
