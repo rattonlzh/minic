@@ -31,6 +31,7 @@ static int nScope = 0;
 /*模拟的内存位置*/
 static int location[MAX_SCOPE];
 
+/*新建名字为funcName的作用域*/
 Scope sc_create(char* funcName)
 {
     Scope newScope;
@@ -39,6 +40,7 @@ Scope sc_create(char* funcName)
     newScope->funcName = funcName;
     newScope->nestedLevel = nScopeStack;
     newScope->parent = sc_top();
+    // 初始化散列表
     for (int i = 0; i < 211; i++)
         newScope->hashTable[i] = NULL;
 
@@ -47,27 +49,32 @@ Scope sc_create(char* funcName)
     return newScope;
 }
 
+/* 返回当前作用域 */
 Scope sc_top( void )
 { return scopeStack[nScopeStack - 1];
 }
 
+/* 移除当前作用域 */
 void sc_pop( void )
 {
   //printf("pop %s\n", sc_top()->funcName);
   --nScopeStack;
 }
 
+/* push一个作用域到栈顶，同时把作用域保存到数组中 */
 void sc_push( Scope scope )
 { scopeStack[nScopeStack] = scope;
   location[nScopeStack++] = 0;
   //printf("push %s\n", scope->funcName);
 }
 
+/* 返回当前作用域新分配的内存位置 */
 int addLocation(void)
 {
     return location[nScopeStack - 1]++;
 }
 
+/* 在当前作用域查找名字为name的符号信息，如果找不到则到父级作用域找，直到找到后返回符号或者全都找不到返回NULL */
 BucketList st_bucket( char * name )
 { int h = hash(name);
   Scope sc = sc_top();
@@ -81,17 +88,20 @@ BucketList st_bucket( char * name )
   return NULL;
 }
 
+/* 查找名字为name的符号的变量的存放位置*/
 int st_lookup ( char * name )
 { BucketList l = st_bucket(name);
   if (l != NULL) return l->memloc;
   return -1;
 }
 
+/**在当前作用域的符号表中查找key为l->name的元素，如果找到则返回变量的存放的位置，否则返回-1*/
 int st_lookup_top (char * name)
 { int h = hash(name);
   Scope sc = sc_top();
   while(sc) {
     BucketList l = sc->hashTable[h];
+
     while ((l != NULL) && (strcmp(name,l->name) != 0))
       l = l->next;
     if (l != NULL) return l->memloc;
@@ -100,6 +110,7 @@ int st_lookup_top (char * name)
   return -1;
 }
 
+/*往当前作用域插入符号*/
 void st_insert(char* name, int lineno, int loc, TreeNode* treeNode)
 {
     int h = hash(name);
@@ -118,6 +129,7 @@ void st_insert(char* name, int lineno, int loc, TreeNode* treeNode)
     top->hashTable[h] = l;
 }
 
+/* 给符号增加行号*/
 void st_add_lineno(char * name, int lineno)
 { BucketList l = st_bucket(name);
   LineList ll = l->lines;
@@ -135,7 +147,7 @@ int testSymTab(BucketList* hashTable, FILE* listing) {
     return 0;
 }
 
-/*打印当前作用域声明的变量*/
+/*打印散列表中出现的所有符号*/
 void printSymTabRows(BucketList* hashTable, FILE* listing) {
 
     for (int j = 0; j < SIZE; ++j)
@@ -213,7 +225,7 @@ void printSymTabRows(BucketList* hashTable, FILE* listing) {
     }
 }
 
-
+/*打印所有作用域的符号表*/
 void printSymTab(FILE* listing)
 {
     fprintf(listing, "Sym.Name     Sym.Type     Data Type    Line Numbers\n");

@@ -2,7 +2,7 @@
 #include "util.h"
 
 /* set NO_PARSE to TRUE to get a scanner-only compiler */
-#define NO_PARSE FALSE
+#define NO_PARSE TRUE
 
 /* set NO_ANALYZE to TRUE to get a parser-only compiler */
 #define NO_ANALYZE FALSE
@@ -35,6 +35,8 @@ int TraceCode    = FALSE;
 
 int Error = FALSE;
 
+
+
 int main( int argc, char * argv[] )
 {
 	if (argc != 2) { 
@@ -59,7 +61,7 @@ int main( int argc, char * argv[] )
 	fprintf(listing, "\nMINIC COMPILATION: %s\n\n", pgm);
 
 #if NO_PARSE
-	//while (getToken() != ENDFILE);
+	while (getToken() != ENDFILE);// 打印词法符号
 #else
 	syntaxTree = parse(source);
 	if (!Error) {

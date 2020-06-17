@@ -113,7 +113,7 @@ var_declaration: type_specifier ID SEMI
 					strcpy($<node>$->attr.arr.name, $2);
 					$<node>$->attr.arr.size = $4;
 				}
-				RB SEMI { $$ = $<node>5; } // $<node>5是上面的{}创建的临时变量
+				RB SEMI { $$ = $<node>5; } // $<node>$是上面的{}创建的临时变量
 				;
 
  /*5、类型说明 type-specifier→ int | void  */

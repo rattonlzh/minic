@@ -30,7 +30,8 @@ typedef union {
 
 INTEGER [0-9]+
 IDENTIFIER [A-Za-z]+
-
+WHITESPACE [ \t]+
+NEWLINE (\r\n)|[\r\n]
 %%
 
 "void"            { return VOID; }
@@ -39,8 +40,6 @@ IDENTIFIER [A-Za-z]+
 "else"            { return ELSE; }
 "while"           { return WHILE; }
 "return"          { return RETURN; }
-{INTEGER}         { yylval.val = atoi(yytext); return NUM; }
-{IDENTIFIER}      { strcpy(yylval.name, yytext); return ID; }
 "+"               { return PLUS; }
 "-"               { return MINUS; }
 "*"               { return TIMES; }
@@ -60,6 +59,8 @@ IDENTIFIER [A-Za-z]+
 "]"               { return RB; }
 "{"               { return LC; }
 "}"               { return RC; }
+{INTEGER}         { yylval.val = atoi(yytext); return NUM; }
+{IDENTIFIER}      { strcpy(yylval.name, yytext); return ID; }
 "/*"              { /* 多行注释 */
                     char c; char d;
                     c = input();
@@ -73,9 +74,9 @@ IDENTIFIER [A-Za-z]+
                     }
                     yycolumn = 1;
                   }
-\/\/.*            { yycolumn = 1; lineno++; }
-[\n]              { yycolumn = 1; lineno++; }
-[ \t]+            { /* \x20 空格; \r 回车 */ }
+
+{NEWLINE}         { yycolumn = 1; lineno++; }
+{WHITESPACE}           { /* \x20 空格; \r 回车 */ }
 .                 { fprintf(listing, "Error: \"%s\"\n\t at Line %d\n", yytext, lineno); return ERROR; }
 
 %%
@@ -85,7 +86,7 @@ IDENTIFIER [A-Za-z]+
  * \/\*(?:[^\*]|\*+[^\/\*])*\*+\/     {}
  */
 
- /*
+ 
 TokenType getToken(void) {
     char tokenString[MAXTOKENLEN+1];
     tokenString[MAXTOKENLEN]='\0';
@@ -107,7 +108,7 @@ TokenType getToken(void) {
     }
     return curToken;
 }
-*/
+
 
 /*
 int main(int argc,char **argv) {

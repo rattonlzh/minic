@@ -1,0 +1,4 @@
+INT: int
+ID: a
+SEMICOLON: ;
+
