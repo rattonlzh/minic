@@ -35,85 +35,85 @@ int main(int argc, char **argv)
             switch (token)
             {
             case ParserBase::ELSE:
-                cout << "ELSE: " << text << endl;
+                cout << scanner.lineNr() << "\t" << "ELSE: " << text << endl;
                 break;
             case ParserBase::IF:
-                cout << "IF: " << text << endl;
+                cout << scanner.lineNr() << "\t" << "IF: " << text << endl;
                 break;
             case ParserBase::RETURN:
-                cout << "RETURN: " << text << endl;
+                cout << scanner.lineNr() << "\t" << "RETURN: " << text << endl;
                 break;
             case ParserBase::INT:
-                cout << "INT: " << text << endl;
+                cout << scanner.lineNr() << "\t" << "INT: " << text << endl;
                 break;
             case ParserBase::VOID:
-                cout << "VOID: " << text << endl;
+                cout << scanner.lineNr() << "\t" << "VOID: " << text << endl;
                 break;
             case ParserBase::WHILE:
-                cout << "WHILE: " << text << endl;
+                cout << scanner.lineNr() << "\t" << "WHILE: " << text << endl;
                 break;
             case ParserBase::LT:
-                cout << "LT: " << text << endl;
+                cout << scanner.lineNr() << "\t" << "LT: " << text << endl;
                 break;
             case ParserBase::LE:
-                cout << "LE: " << text << endl;
+                cout << scanner.lineNr() << "\t" << "LE: " << text << endl;
                 break;
             case ParserBase::GT:
-                cout << "GT: " << text << endl;
+                cout << scanner.lineNr() << "\t" << "GT: " << text << endl;
                 break;
             case ParserBase::GE:
-                cout << "GE: " << text << endl;
+                cout << scanner.lineNr() << "\t" << "GE: " << text << endl;
                 break;
             case ParserBase::EQ:
-                cout << "EQ: " << text << endl;
+                cout << scanner.lineNr() << "\t" << "EQ: " << text << endl;
                 break;
             case ParserBase::NE:
-                cout << "NE: " << text << endl;
+                cout << scanner.lineNr() << "\t" << "NE: " << text << endl;
                 break;
             case ParserBase::COMMA:
-                cout << "COMMA: " << text << endl;
+                cout << scanner.lineNr() << "\t" << "COMMA: " << text << endl;
                 break;
             case ParserBase::SEMICOLON:
-                cout << "SEMICOLON: " << text << endl;
+                cout << scanner.lineNr() << "\t" << "SEMICOLON: " << text << endl;
                 break;
             case ParserBase::ADD:
-                cout << "ADD: " << text << endl;
+                cout << scanner.lineNr() << "\t" << "ADD: " << text << endl;
                 break;
             case ParserBase::SUB:
-                cout << "SUB: " << text << endl;
+                cout << scanner.lineNr() << "\t" << "SUB: " << text << endl;
                 break;
             case ParserBase::MUL:
-                cout << "MUL: " << text << endl;
+                cout << scanner.lineNr() << "\t" << "MUL: " << text << endl;
                 break;
             case ParserBase::DIV:
-                cout << "DIV: " << text << endl;
+                cout << scanner.lineNr() << "\t" << "DIV: " << text << endl;
                 break;
             case ParserBase::ASSIGN:
-                cout << "ASSIGN: " << text << endl;
+                cout << scanner.lineNr() << "\t" << "ASSIGN: " << text << endl;
                 break;
             case ParserBase::LEFTP:
-                cout << "LEFTP: " << text << endl;
+                cout << scanner.lineNr() << "\t" << "LEFTP: " << text << endl;
                 break;
             case ParserBase::RIGHTP:
-                cout << "RIGHTP: " << text << endl;
+                cout << scanner.lineNr() << "\t" << "RIGHTP: " << text << endl;
                 break;
             case ParserBase::LEFTS:
-                cout << "LEFTS: " << text << endl;
+                cout << scanner.lineNr() << "\t" << "LEFTS: " << text << endl;
                 break;
             case ParserBase::RIGHTS:
-                cout << "RIGHTS: " << text << endl;
+                cout << scanner.lineNr() << "\t" << "RIGHTS: " << text << endl;
                 break;
             case ParserBase::LEFTB:
-                cout << "LEFTB: " << text << endl;
+                cout << scanner.lineNr() << "\t" << "LEFTB: " << text << endl;
                 break;
             case ParserBase::RIGHTB:
-                cout << "RIGHTB: " << text << endl;
+                cout << scanner.lineNr() << "\t" << "RIGHTB: " << text << endl;
                 break;
             case ParserBase::ID:
-                cout << "ID: " << text << endl;
+                cout << scanner.lineNr() << "\t" << "ID: " << text << endl;
                 break;
             case ParserBase::NUM:
-                cout << "NUM: " << text << endl;
+                cout << scanner.lineNr() << "\t" << "NUM: " << text << endl;
                 break;
             default:
                 cerr << "程序出错" << std::endl;
