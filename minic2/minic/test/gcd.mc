@@ -11,6 +11,8 @@ int gcd (int u, int v)
 void main(void)
 {
     int x; int y;
+    
     x = input(); y = input();
+    while(1){}
     output(gcd(x,y));
 }

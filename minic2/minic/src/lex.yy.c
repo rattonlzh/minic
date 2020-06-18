@@ -1,5 +1,6 @@
+#line 2 "lex.yy.c"
 
-#line 3 "lex.yy.c"
+#line 4 "lex.yy.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -322,6 +323,9 @@ void yyfree ( void *  );
 #define YY_AT_BOL() (YY_CURRENT_BUFFER_LVALUE->yy_at_bol)
 
 /* Begin user sect3 */
+
+#define yywrap() (/*CONSTCOND*/1)
+#define YY_SKIP_YYWRAP
 typedef flex_uint8_t YY_CHAR;
 
 FILE *yyin = NULL, *yyout = NULL;
@@ -362,12 +366,12 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[59] =
     {   0,
-        0,    0,   33,   31,   30,   29,   29,   31,   20,   21,
-        9,    7,   18,    8,   10,   26,   19,   11,   17,   13,
-       27,   22,   23,   27,   27,   27,   27,   27,   24,   25,
-       30,   29,   16,   28,   26,   12,   15,   14,   27,   27,
-        3,   27,   27,   27,   27,   27,    2,   27,   27,   27,
-        4,   27,    1,   27,   27,    5,    6,    0
+        0,    0,   33,   31,   29,   30,   30,   31,   21,   22,
+       10,    8,   19,    9,   11,   27,   20,   12,   18,   14,
+       28,   23,   24,   28,   28,   28,   28,   28,   25,   26,
+       29,   30,   17,    1,   27,   13,   16,   15,   28,   28,
+        4,   28,   28,   28,   28,   28,    3,   28,   28,   28,
+        5,   28,    2,   28,   28,    6,    7,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -477,10 +481,19 @@ int yy_flex_debug = 0;
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
 #line 1 "scanner.l"
-#line 2 "scanner.l"
+/**
+ * Copyright: Copyright (c) 2020 SCNU Compiler Principle Project Group. All rights reserved.
+ * FilePath: /minic/scanner.l
+ * Description: lex源文件,定义minic需要用到的终结符
+ * Version: 1.0
+ * Author: Liang Zehao, Zhang Yongbiao
+ * Date: 2020-06-17 12:52:55
+ * LastEditTime: 2020-06-18 22:26:56
+ * LastEditors: Liang Zehao
+ */
+#line 13 "scanner.l"
 #include "globals.h"
 #include "util.h"
-
 #include "y.tab.h"
 
 /* 在yylex()每一次识别一个token后，语义执行之前，都将执行该宏中的代码，
@@ -488,10 +501,10 @@ char *yytext;
  * 用于yyerror打印错误信息的位置。
  */
 int yycolumn = 1;
-#define YY_USER_ACTION yylloc.first_line = yylloc.last_line = lineno; \
-                        yylloc.first_column = yycolumn;	\
-                        yylloc.last_column = yycolumn + yyleng - 1; \
-                        yycolumn += yyleng;
+#define YY_USER_ACTION yylloc.first_line = yylloc.last_line = lineno;\
+yylloc.first_column = yycolumn;\
+yylloc.last_column = yycolumn + yyleng - 1; \
+yycolumn += yyleng;
 
 /* 重定义 YYSTYPE */
 typedef union { 
@@ -502,10 +515,9 @@ typedef union {
 } YYLVAL;
 #define YYSTYPE YYLVAL
 
-#line 506 "lex.yy.c"
-/* 为bison提供行号信息 */
-/* %option yylineno */
-#line 509 "lex.yy.c"
+#line 519 "lex.yy.c"
+/*不处理多个文件*/
+#line 521 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -722,10 +734,9 @@ YY_DECL
 		}
 
 	{
-#line 35 "scanner.l"
+#line 44 "scanner.l"
 
-
-#line 729 "lex.yy.c"
+#line 740 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -784,178 +795,195 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 37 "scanner.l"
-{ return VOID; }
+#line 45 "scanner.l"
+{
+// 吃掉注释
+size_t ch = 0;
+// 不断获取输入
+while ((ch = input())) {
+    // 如果读到*， 则把后面连续的*都取走，如果第一个非*字符是/,说明匹配到了*/,注释结束
+    if (ch == '*') {
+        while((ch = input()) == '*') {
+            if (ch == '\n') {
+                ++lineno;
+                yycolumn = 1;
+            }
+        }
+        if (ch == '/') {
+            break;
+        }
+        if (ch == 0) {
+            fprintf(listing, "comment started at %d does not end correctly", lineno);
+            return ERROR;
+        }
+    }else if (ch == '\n') {
+        ++lineno;
+        yycolumn = 1;
+    }
+
+}
+}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 38 "scanner.l"
-{ return INT; }
+#line 72 "scanner.l"
+{ return VOID; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 39 "scanner.l"
-{ return IF; }
+#line 73 "scanner.l"
+{ return INT; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 40 "scanner.l"
-{ return ELSE; }
+#line 74 "scanner.l"
+{ return IF; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 41 "scanner.l"
-{ return WHILE; }
+#line 75 "scanner.l"
+{ return ELSE; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 42 "scanner.l"
-{ return RETURN; }
+#line 76 "scanner.l"
+{ return WHILE; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 43 "scanner.l"
-{ return PLUS; }
+#line 77 "scanner.l"
+{ return RETURN; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 44 "scanner.l"
-{ return MINUS; }
+#line 78 "scanner.l"
+{ return PLUS; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 45 "scanner.l"
-{ return TIMES; }
+#line 79 "scanner.l"
+{ return MINUS; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 46 "scanner.l"
-{ return OVER; }
+#line 80 "scanner.l"
+{ return TIMES; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 47 "scanner.l"
-{ return LT; }
+#line 81 "scanner.l"
+{ return OVER; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 48 "scanner.l"
-{ return LTEQ; }
+#line 82 "scanner.l"
+{ return LT; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 49 "scanner.l"
-{ return GT; }
+#line 83 "scanner.l"
+{ return LTEQ; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 50 "scanner.l"
-{ return GTEQ; }
+#line 84 "scanner.l"
+{ return GT; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 51 "scanner.l"
-{ return EQ; }
+#line 85 "scanner.l"
+{ return GTEQ; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 52 "scanner.l"
-{ return NEQ; }
+#line 86 "scanner.l"
+{ return EQ; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 53 "scanner.l"
-{ return ASSIGN; }
+#line 87 "scanner.l"
+{ return NEQ; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 54 "scanner.l"
-{ return COMMA; }
+#line 88 "scanner.l"
+{ return ASSIGN; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 55 "scanner.l"
-{ return SEMI; }
+#line 89 "scanner.l"
+{ return COMMA; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 56 "scanner.l"
-{ return LP; }
+#line 90 "scanner.l"
+{ return SEMI; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 57 "scanner.l"
-{ return RP; }
+#line 91 "scanner.l"
+{ return LP; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 58 "scanner.l"
-{ return LB; }
+#line 92 "scanner.l"
+{ return RP; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 59 "scanner.l"
-{ return RB; }
+#line 93 "scanner.l"
+{ return LB; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 60 "scanner.l"
-{ return LC; }
+#line 94 "scanner.l"
+{ return RB; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 61 "scanner.l"
-{ return RC; }
+#line 95 "scanner.l"
+{ return LC; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 62 "scanner.l"
-{ yylval.val = atoi(yytext); return NUM; }
+#line 96 "scanner.l"
+{ return RC; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 63 "scanner.l"
-{ strcpy(yylval.name, yytext); return ID; }
+#line 97 "scanner.l"
+{ yylval.val = atoi(yytext); return NUM; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 64 "scanner.l"
-{ /* 多行注释 */
-                    char c; char d;
-                    c = input();
-                    if(c != EOF) {
-                        do {
-                            d = c;
-                            c = input();
-                            if (c == EOF) break;
-                            if (c == '\n') lineno++;
-                            } while (!(d == '*' && c == '/'));
-                    }
-                    yycolumn = 1;
-                  }
+#line 98 "scanner.l"
+{ strcpy(yylval.name, yytext); return ID; }
 	YY_BREAK
 case 29:
-/* rule 29 can match eol */
 YY_RULE_SETUP
-#line 78 "scanner.l"
-{ yycolumn = 1; lineno++; }
+#line 99 "scanner.l"
+{ /* do nothing */ }
 	YY_BREAK
 case 30:
+/* rule 30 can match eol */
 YY_RULE_SETUP
-#line 79 "scanner.l"
-{ /* \x20 空格; \r 回车 */ }
+#line 100 "scanner.l"
+{ ++lineno;yycolumn = 1;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 80 "scanner.l"
-{ fprintf(listing, "Error: \"%s\"\n\t at Line %d\n", yytext, lineno); return ERROR; }
+#line 101 "scanner.l"
+{ 
+    fprintf(listing, "Error: \"%s\"\n\t at Line %d\n", yytext, lineno);
+    return ERROR;
+}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 82 "scanner.l"
+#line 106 "scanner.l"
 ECHO;
 	YY_BREAK
-#line 959 "lex.yy.c"
+#line 987 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1960,55 +1988,29 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 82 "scanner.l"
+#line 106 "scanner.l"
 
 
-/*
- * "{"[^}\n]*"}"                      {}
- * \/\*(?:[^\*]|\*+[^\/\*])*\*+\/     {}
- */
+
 
  
 TokenType getToken(void) {
     char tokenString[MAXTOKENLEN+1];
     tokenString[MAXTOKENLEN]='\0';
-
-    static int firstTime;
-    firstTime = TRUE;
     TokenType curToken;
-    if (firstTime) {
-        firstTime = FALSE;
-        lineno++;
-        yyin = source;
-        yyout = listing;
-    }
     curToken = yylex();
     strncpy(tokenString, yytext, MAXTOKENLEN);
     if (TraceScan) {
-        fprintf(listing, "\t%d: ", lineno);
+        fprintf(listing, " %d: ", lineno);
         printToken(curToken, tokenString);
     }
     return curToken;
 }
 
-
-/*
-int main(int argc,char **argv) {
-    ++argv;
-    --argc;
-    if (argc > 0) 
-        yyin = fopen(argv[0], "r");
-    else 
-        yyin = stdin;
-    yylex();
-    return 0;
-}
-*/
-
-/* 这一函数在文件（或输入）的末尾调用。
- * 如果函数的返回值是1，就停止解析。 
-*/
-int yywrap()
+void init()
 {
-    return 1;
+    yyin = source;
+    yyout = listing;
 }
+
+
