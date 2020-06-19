@@ -146,6 +146,26 @@ BucketList st_bucket(char *name)
 }
 
 /**
+ * @brief 返回当前符号的作用域
+ *
+ * @param name
+ * @return Scope
+ */
+Scope st_scope(char* name)
+{
+    int h = hash(name);
+    Scope sc = sc_top();
+    while (sc) {
+        BucketList l = sc->hashTable[h];
+        while ((l != NULL) && (strcmp(name, l->name) != 0))
+            l = l->next;
+        if (l != NULL) return sc;
+        sc = sc->parent;
+    }
+    return NULL;
+}
+
+/**
  * @brief 找到当前作用域及祖先作用域的符号表中名字为name的符号的内存位置，找不到则返回-1，可用于类型检查
  * 
  * @param name 

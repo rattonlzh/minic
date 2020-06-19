@@ -201,8 +201,12 @@ static void insertNode(TreeNode *t)
                 t->type = Array;
             }
 
-            if (st_lookup_top(name) == -1)
+            if (st_lookup_top(name) == -1) {
                 st_insert(name, t->lineno, addLocation(), t);
+                if (t->kind.decl == ArrVarK)
+                    for (int i = 1; i < t->attr.arr.size; i++)
+                        addLocation();
+            }
             else
                 symbolError(t, "symbol already declared for current scope");
         }
@@ -315,9 +319,10 @@ static void checkNode(TreeNode *t)
         // 前面的函数作用域失效
             sc_pop();
             break;
+        case IfK:
         case IterK:
             if (t->child[0]->type == Void)
-            typeError(t->child[0],"while test has void value");
+                typeError(t->child[0], "test has void value");
             break;
         case RetK:
         {
@@ -382,7 +387,10 @@ static void checkNode(TreeNode *t)
             }
             else
             {
-                t->type = symbolDecl->type;
+                if (symbolDecl->kind.param != ArrParamK && symbolDecl->kind.decl == FuncK)
+                    typeError(t, "function call error");
+                else
+                    t->type = symbolDecl->type;
             }
         }
         break;
