@@ -9,11 +9,11 @@ OBJS = y.tab.o lex.yy.o main.o util.o symtab.o analyze.o code.o cgen.o
 ifeq ($(OS),Windows_NT)
 TARGET = ..\bin\minic.exe
 DEL = del
-TM = tm.exe
+TM = ..\bin\tm.exe
 else
 TARGET = ../bin/minic
 DEL = rm
-TM = tm
+TM = ../bin/tm
 endif
 
 all: $(TARGET)
@@ -53,18 +53,20 @@ lex.yy.c: scanner.l
 y.tab.h y.tab.c: parser.y
 	bison -d parser.y --yacc
 clean:
-	$(DEL) $(OBJS)
+	$(DEL) $(OBJS) tm.o 
+
 testGcd:$(TARGET)
 	$(TARGET) ../test/gcd.mc -s -p -a -c
 testSort:$(TARGET)
 	$(TARGET) ../test/sort.mc -s -p -a -c
 test:$(TARGET)
-	$(TARGET) ../test/parse1.mc -s -p -a -c
+	$(TARGET) ../test/sort.mc -s -p -a -c
 
 $(TM):tm.o
 	$(CC) $(CFLAGS) tm.o -o $(TM)
-$(TM):tm.c
+	$(DEL) tm.o
+tm.o :tm.c
 	$(CC) $(CFLAGS) -c tm.c
 
 run:$(TM)
-	$(TM) test.tm
+	$(TM) ../test/test.tm
