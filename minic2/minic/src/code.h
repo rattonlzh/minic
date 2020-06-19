@@ -1,11 +1,11 @@
 /*
  * @Copyright: Copyright (c) 2020 SCNU Compiler Principle Project Group. All rights reserved.
- * @FilePath: /minic/code.h
+ * @FilePath: /minic/minic2/minic/src/code.h
  * @Description: 用于辅助生成中间代码的函数声明文件
  * @Version: 1.0
  * @Author: Liang Zehao, Zhang Yongbiao
  * @Date: 2020-06-17 12:52:55
- * @LastEditTime: 2020-06-18 22:27:40
+ * @LastEditTime: 2020-06-19 10:55:54
  * @LastEditors: Liang Zehao
  */ 
 

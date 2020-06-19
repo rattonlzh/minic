@@ -25,7 +25,7 @@ static int highEmitLoc = 0;
  * with comment c in the code file
  */
 void emitComment( char * c )
-{ if (TraceCode) fprintf(code,"* %s\n",c);}
+{ if (TraceCode) fprintf(listing,"* %s\n",c);}
 
 /* Procedure emitRO emits a register-only
  * TM instruction
@@ -37,7 +37,7 @@ void emitComment( char * c )
  */
 void emitRO( char *op, int r, int s, int t, char *c)
 { fprintf(code,"%3d:  %5s  %d,%d,%d ",emitLoc++,op,r,s,t);
-  if (TraceCode) fprintf(code,"\t%s",c) ;
+  if (TraceCode) fprintf(listing,"\t%s",c) ;
   fprintf(code,"\n") ;
   if (highEmitLoc < emitLoc) highEmitLoc = emitLoc ;
 } /* emitRO */
@@ -52,7 +52,7 @@ void emitRO( char *op, int r, int s, int t, char *c)
  */
 void emitRM( char * op, int r, int d, int s, char *c)
 { fprintf(code,"%3d:  %5s  %d,%d(%d) ",emitLoc++,op,r,d,s);
-  if (TraceCode) fprintf(code,"\t%s",c) ;
+  if (TraceCode) fprintf(listing,"\t%s",c) ;
   fprintf(code,"\n") ;
   if (highEmitLoc < emitLoc)  highEmitLoc = emitLoc ;
 } /* emitRM */
@@ -95,7 +95,7 @@ void emitRM_Abs( char *op, int r, int a, char * c)
 { fprintf(code,"%3d:  %5s  %d,%d(%d) ",
                emitLoc,op,r,a-(emitLoc+1),pc);
   ++emitLoc ;
-  if (TraceCode) fprintf(code,"\t%s",c) ;
+  if (TraceCode) fprintf(listing,"\t%s",c) ;
   fprintf(code,"\n") ;
   if (highEmitLoc < emitLoc) highEmitLoc = emitLoc ;
 } /* emitRM_Abs */
