@@ -1,14 +1,9 @@
-/*
- * @Copyright: Copyright (c) 2020 SCNU Compiler Principle Project Group. All rights reserved.
- * @FilePath: /minic/tm.c
- * @Description: 虚拟机的实现
- * @Version: 1.0
- * @Author: Liang Zehao, Zhang Yongbiao
- * @Date: 2020-06-17 12:52:55
- * @LastEditTime: 2020-06-18 22:29:01
- * @LastEditors: Liang Zehao
- */ 
-************************************/
+/****************************************************/
+/* File: tm.c                                       */
+/* The TM ("Tiny Machine") computer                 */
+/* Compiler Construction: Principles and Practice   */
+/* Kenneth C. Louden                                */
+/****************************************************/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -562,7 +557,7 @@ int doCommand (void)
 /* E X E C U T I O N   B E G I N S   H E R E */
 /********************************************/
 
-void main( int argc, char * argv[] )
+int main( int argc, char * argv[] )
 { if (argc != 2)
   { printf("usage: %s <filename>\n",argv[0]);
     exit(1);
