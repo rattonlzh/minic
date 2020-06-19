@@ -71,7 +71,7 @@ test:$(TARGET)
 ifeq ($(OS),Windows_NT)
 	chcp 65001
 endif
-	$(TARGET) ../test/sort.mc 
+	$(TARGET) ../test/sort.mc -g
 tm:tm.o
 	$(CC) $(CFLAGS) tm.o -o $(TM)
 	$(DEL) tm.o
