@@ -29,9 +29,9 @@ color:white;
 }
 QWidget#centralwidget {
 color:white;
-background-image: url(:/assets/bg.png);
+background-image: url(bg.png);
 }
-QPushButton {
+.QPushButton {
 
     color: white;
     font: 14px &quot;黑体&quot;;
@@ -51,6 +51,9 @@ border:none;
 }
 QMainWindow QLineEdit {
 background-color:rgba(19, 37, 54, 150);
+}
+.QPushButton:pressed {
+    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.0995025 rgba(151, 0, 113, 202), stop:0.502488 rgba(109, 91, 201, 205), stop:0.855721 rgba(34, 164, 222, 205));
 }
 </string>
   </property>

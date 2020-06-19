@@ -61,7 +61,7 @@ public slots:
 
     void on_action_Save_triggered();
     void saveAs();
-    void warn(QString msg, QString title=tr("minic编辑器"));
+    void warn(const char * msg, const char *title= "minic编辑器");
     void on_actionSave_As_triggered();
     
     void on_actionClose_triggered();

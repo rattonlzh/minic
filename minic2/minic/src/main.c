@@ -5,7 +5,7 @@
  * @Version: 1.0
  * @Author: Liang Zehao, Zhang Yongbiao
  * @Date: 2020-06-17 12:52:55
- * @LastEditTime: 2020-06-19 19:01:27
+ * @LastEditTime: 2020-06-19 23:17:55
  * @LastEditors: Liang Zehao
  */
 #include <stdio.h>
@@ -152,9 +152,11 @@ void main(int argc, char *argv[])
             exit(1);
         }
     }
-
-    // 得到语法树
-    syntaxTree = parse(source);
+    if (TraceParse || TraceAnalyze || TraceCode || GenCode)
+    {
+        // 得到语法树
+        syntaxTree = parse(source);
+    }
     if (!Error)
     {
         if (TraceParse)

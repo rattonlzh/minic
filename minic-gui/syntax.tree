@@ -1,0 +1,132 @@
+
+==== Compilation for E:/Desktop/test3.mc ====
+Generating the syntax tree...
+    Program
+    ©À©¤©¤ ArrVarDec: x, len: 10
+    ©¦   ©¸©¤©¤ Type: int
+    ©À©¤©¤ FuncDec: minloc
+    ©¦   ©À©¤©¤ Type: int
+    ©¦   ©À©¤©¤ Array Parameter: a
+    ©¦   ©¦   ©¸©¤©¤ Type: int
+    ©¦   ©À©¤©¤ Parameter: low
+    ©¦   ©¦   ©¸©¤©¤ Type: int
+    ©¦   ©À©¤©¤ Parameter: high
+    ©¦   ©¦   ©¸©¤©¤ Type: int
+    ©¦   ©¸©¤©¤ Compound Statment
+    ©¦       ©À©¤©¤ VarDec: i
+    ©¦       ©¦   ©¸©¤©¤ Type: int
+    ©¦       ©À©¤©¤ VarDec: x
+    ©¦       ©¦   ©¸©¤©¤ Type: int
+    ©¦       ©À©¤©¤ VarDec: k
+    ©¦       ©¦   ©¸©¤©¤ Type: int
+    ©¦       ©À©¤©¤ Assign
+    ©¦       ©¦   ©À©¤©¤ Id: k
+    ©¦       ©¦   ©¸©¤©¤ Id: low
+    ©¦       ©À©¤©¤ Assign
+    ©¦       ©¦   ©À©¤©¤ Id: x
+    ©¦       ©¦   ©¸©¤©¤ Array Id: a
+    ©¦       ©¦       ©¸©¤©¤ Id: low
+    ©¦       ©À©¤©¤ Assign
+    ©¦       ©¦   ©À©¤©¤ Id: i
+    ©¦       ©¦   ©¸©¤©¤ Op: operator: 
+    ©¦       ©¦       ©À©¤©¤ Id: low
+    ©¦       ©¦       ©¸©¤©¤ Const: 1
+    ©¦       ©À©¤©¤ While
+    ©¦       ©¦   ©À©¤©¤ Op: operator: 
+    ©¦       ©¦   ©¦   ©À©¤©¤ Id: i
+    ©¦       ©¦   ©¦   ©¸©¤©¤ Id: high
+    ©¦       ©¦   ©¸©¤©¤ Compound Statment
+    ©¦       ©¦       ©À©¤©¤ If
+    ©¦       ©¦       ©¦   ©À©¤©¤ Op: operator: 
+    ©¦       ©¦       ©¦   ©¦   ©À©¤©¤ Array Id: a
+    ©¦       ©¦       ©¦   ©¦   ©¦   ©¸©¤©¤ Id: i
+    ©¦       ©¦       ©¦   ©¦   ©¸©¤©¤ Id: x
+    ©¦       ©¦       ©¦   ©¸©¤©¤ Compound Statment
+    ©¦       ©¦       ©¦       ©À©¤©¤ Assign
+    ©¦       ©¦       ©¦       ©¦   ©À©¤©¤ Id: x
+    ©¦       ©¦       ©¦       ©¦   ©¸©¤©¤ Array Id: a
+    ©¦       ©¦       ©¦       ©¦       ©¸©¤©¤ Id: i
+    ©¦       ©¦       ©¦       ©¸©¤©¤ Assign
+    ©¦       ©¦       ©¦           ©À©¤©¤ Id: k
+    ©¦       ©¦       ©¦           ©¸©¤©¤ Id: i
+    ©¦       ©¦       ©¸©¤©¤ Assign
+    ©¦       ©¦           ©À©¤©¤ Id: i
+    ©¦       ©¦           ©¸©¤©¤ Op: operator: 
+    ©¦       ©¦               ©À©¤©¤ Id: i
+    ©¦       ©¦               ©¸©¤©¤ Const: 1
+    ©¦       ©¸©¤©¤ Return
+    ©¦           ©¸©¤©¤ Id: k
+    ©¸©¤©¤ FuncDec: main
+        ©À©¤©¤ Type: void
+        ©¸©¤©¤ Compound Statment
+            ©À©¤©¤ VarDec: i
+            ©¦   ©¸©¤©¤ Type: int
+            ©À©¤©¤ VarDec: k
+            ©¦   ©¸©¤©¤ Type: int
+            ©À©¤©¤ VarDec: t
+            ©¦   ©¸©¤©¤ Type: int
+            ©À©¤©¤ Assign
+            ©¦   ©À©¤©¤ Id: i
+            ©¦   ©¸©¤©¤ Const: 0
+            ©À©¤©¤ While
+            ©¦   ©À©¤©¤ Op: operator: 
+            ©¦   ©¦   ©À©¤©¤ Id: i
+            ©¦   ©¦   ©¸©¤©¤ Const: 10
+            ©¦   ©¸©¤©¤ Compound Statment
+            ©¦       ©À©¤©¤ Assign
+            ©¦       ©¦   ©À©¤©¤ Array Id: x
+            ©¦       ©¦   ©¦   ©¸©¤©¤ Id: i
+            ©¦       ©¦   ©¸©¤©¤ Call function: input
+            ©¦       ©¸©¤©¤ Assign
+            ©¦           ©À©¤©¤ Id: i
+            ©¦           ©¸©¤©¤ Op: operator: 
+            ©¦               ©À©¤©¤ Id: i
+            ©¦               ©¸©¤©¤ Const: 1
+            ©À©¤©¤ Assign
+            ©¦   ©À©¤©¤ Id: i
+            ©¦   ©¸©¤©¤ Const: 0
+            ©À©¤©¤ While
+            ©¦   ©À©¤©¤ Op: operator: 
+            ©¦   ©¦   ©À©¤©¤ Id: i
+            ©¦   ©¦   ©¸©¤©¤ Const: 9
+            ©¦   ©¸©¤©¤ Compound Statment
+            ©¦       ©À©¤©¤ Assign
+            ©¦       ©¦   ©À©¤©¤ Id: k
+            ©¦       ©¦   ©¸©¤©¤ Call function: minloc
+            ©¦       ©¦       ©À©¤©¤ Id: x
+            ©¦       ©¦       ©À©¤©¤ Id: i
+            ©¦       ©¦       ©¸©¤©¤ Const: 10
+            ©¦       ©À©¤©¤ Assign
+            ©¦       ©¦   ©À©¤©¤ Id: t
+            ©¦       ©¦   ©¸©¤©¤ Array Id: x
+            ©¦       ©¦       ©¸©¤©¤ Id: k
+            ©¦       ©À©¤©¤ Assign
+            ©¦       ©¦   ©À©¤©¤ Array Id: x
+            ©¦       ©¦   ©¦   ©¸©¤©¤ Id: k
+            ©¦       ©¦   ©¸©¤©¤ Array Id: x
+            ©¦       ©¦       ©¸©¤©¤ Id: i
+            ©¦       ©À©¤©¤ Assign
+            ©¦       ©¦   ©À©¤©¤ Array Id: x
+            ©¦       ©¦   ©¦   ©¸©¤©¤ Id: i
+            ©¦       ©¦   ©¸©¤©¤ Id: t
+            ©¦       ©¸©¤©¤ Assign
+            ©¦           ©À©¤©¤ Id: i
+            ©¦           ©¸©¤©¤ Op: operator: 
+            ©¦               ©À©¤©¤ Id: i
+            ©¦               ©¸©¤©¤ Const: 1
+            ©À©¤©¤ Assign
+            ©¦   ©À©¤©¤ Id: i
+            ©¦   ©¸©¤©¤ Const: 0
+            ©¸©¤©¤ While
+                ©À©¤©¤ Op: operator: 
+                ©¦   ©À©¤©¤ Id: i
+                ©¦   ©¸©¤©¤ Const: 10
+                ©¸©¤©¤ Compound Statment
+                    ©À©¤©¤ Call function: output
+                    ©¦   ©¸©¤©¤ Array Id: x
+                    ©¦       ©¸©¤©¤ Id: i
+                    ©¸©¤©¤ Assign
+                        ©À©¤©¤ Id: i
+                        ©¸©¤©¤ Op: operator: 
+                            ©À©¤©¤ Id: i
+                            ©¸©¤©¤ Const: 1

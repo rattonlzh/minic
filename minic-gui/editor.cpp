@@ -29,7 +29,11 @@ Editor::Editor(QWidget *parent)
 
 
 void Editor::init() {
-
+    QPalette palette;
+    QPixmap pixmap("bg.png");
+    palette.setBrush(QPalette::Window, QBrush(pixmap));
+    this->setPalette(palette);
+    this->setAutoFillBackground(true);
 fileName = QCoreApplication::applicationDirPath()+"/autosaved.mc";
     //Qt中使用QSettings类读写ini文件   
     //QSettings构造函数的第一个参数是ini文件的路径,第二个参数表示针对ini文件,第三个参数可以缺省   
@@ -76,8 +80,8 @@ void Editor::call(QString bin) {
             << fileName << "-g");
     }
     else if (bin == tr("run")) {
-        p.start(cmdpath.tmPath, QStringList()
-            << fileName);//bug 不能输入
+        this->ui->outputArea->setText(QString::fromLocal8Bit("本程序暂时不支持从gui上运行虚拟机，请使用命令行操作"));
+        return;
     }
 //   开始执行
     p.waitForStarted();
@@ -105,13 +109,13 @@ void Editor::call(QString bin) {
 
     // 执行完毕后检查是否结果另存为文件，如果是打勾且文件名输入框不为空，则保存结果文件
     if (ui->saveCheckBox->isChecked() && !ui->savePathEdit->text().isEmpty()) {
-        
+        saveOutput();
     }
 }
 
 void Editor::open()
 {
-    QString fn = QFileDialog::getOpenFileName(this, tr("打开文件"), fileName, tr("minic源文件(*.mc *.tm);;所有文件(*.*)"));// 选择打开文件路径
+    QString fn = QFileDialog::getOpenFileName(this, QString::fromLocal8Bit("打开文件"), fileName, QString::fromLocal8Bit("minic源文件(*.mc *.tm);;所有文件(*.*)"));// 选择打开文件路径
     if (fn.isEmpty()) {
         warn("未选择文件");
         return;
@@ -182,7 +186,7 @@ void Editor::on_action_Save_triggered()
 
 void Editor::saveAs()
 {
-    QString fn = QFileDialog::getSaveFileName(this, tr("另存为"), fileName, tr("minic源文件(*.mc *.txt);;所有文件(*.*)"));// 打开另存为对话框选择保存路径
+    QString fn = QFileDialog::getSaveFileName(this, QString::fromLocal8Bit("另存为"), fileName, QString::fromLocal8Bit("minic源文件(*.mc *.txt);;所有文件(*.*)"));// 打开另存为对话框选择保存路径
     if (fn.isEmpty()) {
         warn("未选择文件");
         return;
@@ -192,9 +196,9 @@ void Editor::saveAs()
     
 }
 
-void Editor::warn(QString msg, QString title)
+void Editor::warn(const char* msg, const char* title)
 {
-    QMessageBox::warning(this, title, msg);
+    QMessageBox::warning(this, QString::fromLocal8Bit(title), QString::fromLocal8Bit(msg));
 }
 
 void Editor::on_actionSave_As_triggered()

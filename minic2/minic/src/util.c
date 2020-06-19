@@ -189,20 +189,20 @@ static void printIndent(int closed[], int k)
     {
         if (closed[i])
         {
-            fprintf(listing, "    ");
+            fprintf(listing, "      ");
         }
         else
         {
-            fprintf(listing, "│   ");
+            fprintf(listing, "  │   ");
         }
     }
     if (closed[k])
     {
-        fprintf(listing, "└── ");
+        fprintf(listing, "  └── ");
     }
     else
     {
-        fprintf(listing, "├── ");
+        fprintf(listing, "  ├── ");
     }
 }
 
