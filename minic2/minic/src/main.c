@@ -1,14 +1,14 @@
 /*
  * @Copyright: Copyright (c) 2020 SCNU Compiler Principle Project Group. All rights reserved.
- * @FilePath: /minic/src/main.c
+ * @FilePath: /minic/minic2/minic/src/main.c
  * @Description: 主函数入口文件
  * @Version: 1.0
  * @Author: Liang Zehao, Zhang Yongbiao
  * @Date: 2020-06-17 12:52:55
- * @LastEditTime: 2020-06-18 23:44:28
+ * @LastEditTime: 2020-06-19 10:56:49
  * @LastEditors: Liang Zehao
  */
-
+#include <stdio.h>
 #include "globals.h"
 #include "util.h"
 #include "y.tab.h"
@@ -27,8 +27,10 @@ int TraceScan = FALSE;
 int TraceParse = FALSE;
 // 类型检查和生成符号表
 int TraceAnalyze = FALSE;
-// 生成中间代码
+// 跟踪中间代码生成工程
 int TraceCode = FALSE;
+// 产生中间代码
+int GenCode = FALSE;
 // 如果出现错误则置为ＴＲＵＥ
 int Error = FALSE;
 // 输入参数的最大长度
@@ -77,7 +79,11 @@ void main(int argc, char *argv[])
             }
             else if (strcmp(argv[i], "-c") == 0 || strcmp(argv[i], "--code") == 0)
             {
+                GenCode = TRUE;
                 TraceCode = TRUE;
+            }else if (strcmp(argv[i], "-g") == 0 || strcmp(argv[i], "--genCode") == 0)
+            {
+                GenCode = TRUE;
             }
             else
             {
@@ -115,11 +121,11 @@ void main(int argc, char *argv[])
         fprintf(stderr, "File %s not found\n", infile);
         exit(1);
     }
-    fprintf(listing, "\n==== Compilation for %s ====\n", infile);
+    printf("\n==== Compilation for %s ====\n", infile);
     if (TraceScan)
     {
         init(); // 设置lex分析器的输入流和输出流
-        fprintf(listing, "Scanning the tokens...\n");
+        printf("Scanning the tokens...\n");
         while (getToken() != ENDFILE)
             ; // 打印词法符号
         fclose(source);
@@ -139,20 +145,19 @@ void main(int argc, char *argv[])
     {
         if (TraceParse)
         {
-            fprintf(listing, "Generating the syntax tree...\n");
+            printf("Generating the syntax tree...\n");
             printTree(syntaxTree);
         }
         if (TraceAnalyze)
         {
-            fprintf(listing, "Building symbol table...\n");
+            printf("Building symbol table...\n");
             buildSymtab(syntaxTree);
-            fprintf(listing, "Checking types...\n");
+            printf("Checking types...\n");
             typeCheck(syntaxTree);
-            fprintf(listing, "Type Checking Finished\n");
+            printf("Type Checking Finished\n");
         }
-        if (TraceCode)
+        if (GenCode)
         {
-
             code = fopen(codefile, "w");
             if (code == NULL)
             {
@@ -160,7 +165,9 @@ void main(int argc, char *argv[])
                 exit(1);
             }
             codeGen(syntaxTree, codefile);
+            printf("intermediate code file %s generated.", codefile);
             fclose(code);
+            
         }
     }
     else
