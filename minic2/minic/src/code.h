@@ -6,7 +6,7 @@
  * @Author: Liang Zehao, Zhang Yongbiao
  * @Date: 2020-06-17 12:52:55
  * @LastEditTime: 2020-06-19 10:55:54
- * @LastEditors: Liang Zehao
+ * @LastEditors: Zhang Yongbiao
  */ 
 
 #ifndef _CODE_H_
@@ -15,32 +15,28 @@
 /* pc = program counter  */
 #define  pc 7
 
-/* mp = "memory pointer" points
- * to top of memory (for temp storage)
+/* mp = "memory pointer"
+ * 指向临时变量内存空间的顶部
  */
 #define  mp 6
 
-/* gp = "global pointer" points
- * to bottom of memory for (global)
- * variable storage
- */
+/* gp = "global pointer"
+  * 通常指向全局变量的内存空间的底部
+  */
 #define gp 5
 
-/* accumulator */
+/* 累加器*/
 #define  ac 0
 
-/* 2nd accumulator */
+/* 第二个累加器 */
 #define  ac1 1
 
-/* code emitting utilities */
+/* 输出中间代码的方法 */
 
-/* Procedure emitComment prints a comment line 
- * with comment c in the code file
- */
+/* 输出注释*/
 void emitComment( char * c );
 
-/* Procedure emitRO emits a register-only
- * TM instruction
+/* 输出寄存器型指令
  * op = the opcode
  * r = target register
  * s = 1st source register
@@ -49,8 +45,7 @@ void emitComment( char * c );
  */
 void emitRO( char *op, int r, int s, int t, char *c);
 
-/* Procedure emitRM emits a register-to-memory
- * TM instruction
+/* 输出寄存器-内存型指令
  * op = the opcode
  * r = target register
  * d = the offset
@@ -59,26 +54,16 @@ void emitRO( char *op, int r, int s, int t, char *c);
  */
 void emitRM( char * op, int r, int d, int s, char *c);
 
-/* Function emitSkip skips "howMany" code
- * locations for later backpatch. It also
- * returns the current code position
- */
+/* 跳过输出指定数量的指令，并返回当前输出指令的序号*/
 int emitSkip( int howMany);
 
-/* Procedure emitBackup backs up to 
- * loc = a previously skipped location
- */
+/* 将当前输出指令的序号置为指定序号，以输出之前跳过的指令*/
 void emitBackup( int loc);
 
-/* Procedure emitRestore restores the current 
- * code position to the highest previously
- * unemitted position
- */
+/* 将当前输出指令的序号恢复为正常的当前最大的序号*/
 void emitRestore(void);
 
-/* Procedure emitRM_Abs converts an absolute reference 
- * to a pc-relative reference when emitting a
- * register-to-memory TM instruction
+/* 将绝对位置转化为相对位置并输出指定的转移型指令
  * op = the opcode
  * r = target register
  * a = the absolute location in memory

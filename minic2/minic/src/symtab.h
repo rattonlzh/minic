@@ -101,6 +101,14 @@ int addLocation( void );
 BucketList st_bucket(char* name);
 
 /**
+ * @brief 返回当前符号的作用域
+ *
+ * @param name
+ * @return Scope
+ */
+Scope st_scope(char* name);
+
+/**
  * @brief 找到栈顶作用域符号表中名字为name的符号的内存位置
  * 
  * @param name 
