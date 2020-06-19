@@ -5,7 +5,7 @@
  * @Version: 1.0
  * @Author: Liang Zehao, Zhang Yongbiao
  * @Date: 2020-06-17 12:52:55
- * @LastEditTime: 2020-06-19 10:56:49
+ * @LastEditTime: 2020-06-19 19:01:27
  * @LastEditors: Liang Zehao
  */
 #include <stdio.h>
@@ -56,7 +56,7 @@ void main(int argc, char *argv[])
     TreeNode *syntaxTree;
     // 输出流设为标准输出流
     listing = stdout;
-
+    int hasOption = FALSE;
     // 扫描所有输入参数
     for (int i = 1; i < argc; ++i)
     {
@@ -67,23 +67,28 @@ void main(int argc, char *argv[])
             {
                 // 允许打印词法符号
                 TraceScan = TRUE;
+                hasOption = TRUE;
             }
             else if (strcmp(argv[i], "-p") == 0 || strcmp(argv[i], "--parse") == 0)
             {
                 // 允许打印语法树
                 TraceParse = TRUE;
+                hasOption = TRUE;
             }
             else if (strcmp(argv[i], "-a") == 0 || strcmp(argv[i], "--analyze") == 0)
             {
                 TraceAnalyze = TRUE;
+                hasOption = TRUE;
             }
             else if (strcmp(argv[i], "-c") == 0 || strcmp(argv[i], "--code") == 0)
             {
                 GenCode = TRUE;
                 TraceCode = TRUE;
+                hasOption = TRUE;
             }else if (strcmp(argv[i], "-g") == 0 || strcmp(argv[i], "--genCode") == 0)
             {
                 GenCode = TRUE;
+                hasOption = TRUE;
             }
             else
             {
@@ -110,6 +115,15 @@ void main(int argc, char *argv[])
             in = TRUE;
         }
     } // 扫描完所有参数
+    // 如果不加option默认开启所有option
+    if (!hasOption)
+    {
+        TraceScan = TRUE;
+        TraceParse = TRUE;
+        TraceAnalyze = TRUE;
+        TraceCode = TRUE;
+        GenCode = TRUE;
+    }
     if (!in)
     {
         fprintf(stderr, "A inputfile is needed.\n");

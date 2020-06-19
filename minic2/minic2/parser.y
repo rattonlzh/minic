@@ -17,6 +17,7 @@
 extern char *yytext; /*匹配模式的文本存储在这一变量中（char*）*/
 extern FILE *yyin; /*FILE*类型，指向lexer正在解析的当前文件*/
 
+
 //#define YYSTYPE TokenStruct
 
 TreeNode * parseTree; /*stores syntax tree for later return*/

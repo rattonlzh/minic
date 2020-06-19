@@ -65,10 +65,9 @@ void yyerror(const char* message, ...);
 %token PLUS MINUS TIMES OVER
 %token LP RP LB RB LC RC
 %token SEMI COMMA
-%token PLUS MINUS
-%token TIMES OVER
+%left PLUS MINUS TIMES OVER
 %token EQ NEQ LTEQ GTEQ LT GT
-%token ASSIGN
+%right ASSIGN
 
 // 不可结合
 %nonassoc WITHOUT_ELSE /*解决二义性*/
@@ -78,8 +77,9 @@ void yyerror(const char* message, ...);
 
  /*1、开始符 program→ declaration-list */
 program: declaration_list 
-		{	parseTree = $1; 
-			YYACCEPT; /* 在动作中使yyparse()以一个零值立即返回，显示成功。*/ 
+		{	
+			parseTree = $1; 
+			YYACCEPT; // 在动作中使yyparse()以一个零值立即返回，显示成功。
 		}
 		;
 

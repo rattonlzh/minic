@@ -68,6 +68,9 @@
     ├── scan4.mc
     └── sort.mc
 - bin是命令行可执行程序的目录，
+- src是命令行程序源码目录
+- test是测试用例文件，test/expected的文件是同名测试用例的预期输出
+- tools是flex.exe和bison.exe程序
 
 ## 编译软硬件要求
 
