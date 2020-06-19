@@ -28,6 +28,46 @@
 
 
 ## 目录结构及重要文件说明
+.
+├── bin
+│   └── minic
+├── README.md
+├── src
+│   ├── analyze.c
+│   ├── analyze.h
+│   ├── cgen.c
+│   ├── cgen.h
+│   ├── code.c
+│   ├── code.h
+│   ├── globals.h
+│   ├── lex.yy.c
+│   ├── main.c
+│   ├── Makefile
+│   ├── parser.y
+│   ├── scanner.l
+│   ├── symtab.c
+│   ├── symtab.h
+│   ├── tm.c
+│   ├── util.c
+│   ├── util.h
+│   ├── y.tab.c
+│   └── y.tab.h
+└── test
+    ├── expected
+    ├── gcd.mc
+    ├── gcd.tm
+    ├── parse1.mc
+    ├── parse1.tm
+    ├── parse2.mc
+    ├── parse3.mc
+    ├── parse4.mc
+    ├── parse5.mc
+    ├── scan1.mc
+    ├── scan2.mc
+    ├── scan3.mc
+    ├── scan4.mc
+    └── sort.mc
+- bin是命令行可执行程序的目录，
 
 ## 编译软硬件要求
 
