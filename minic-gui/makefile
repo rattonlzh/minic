@@ -1,0 +1,1 @@
+minic-gui.exe: main.o optiondialog.o editor.o
