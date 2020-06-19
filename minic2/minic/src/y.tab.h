@@ -73,9 +73,7 @@ extern int yydebug;
     RC = 283,
     SEMI = 284,
     COMMA = 285,
-    UMINUS = 286,
-    NOT = 287,
-    WITHOUT_ELSE = 288
+    WITHOUT_ELSE = 286
   };
 #endif
 /* Tokens.  */
@@ -107,23 +105,21 @@ extern int yydebug;
 #define RC 283
 #define SEMI 284
 #define COMMA 285
-#define UMINUS 286
-#define NOT 287
-#define WITHOUT_ELSE 288
+#define WITHOUT_ELSE 286
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 
 union YYSTYPE
 {
-#line 27 "parser.y" /* yacc.c:1909  */
+#line 37 "parser.y" /* yacc.c:1909  */
  
 	struct treeNode * node;
     int op; 
 	int val; 
 	char name[256];
 
-#line 127 "y.tab.h" /* yacc.c:1909  */
+#line 123 "y.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
