@@ -1,1 +1,0 @@
-array Compiler MAXCNT elseif returnResult integer voidRoom whileRunning

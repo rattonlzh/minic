@@ -1,9 +1,0 @@
-NUM: 1234567890
-NUM: 0
-NUM: 1
-NUM: 0001
-NUM: 100
-SUB: -
-NUM: 9
-MUL: *
-DIV: /
